@@ -12,7 +12,7 @@
  * @package My_Career
  */
 
-get_header();
+get_header('index');
 ?>
 
 <main class="page__main index-page">
@@ -20,7 +20,7 @@ get_header();
 		<section class="index-page__carousel">
 			<div class="slide">
 				<div class="slide__image-wrapper">
-					<img src="./img/index-slide-1.jpg" alt="" class="slide__image">
+					<img src="<?php bloginfo('template_url'); ?>/images/index-slide-1.jpg" alt="" class="slide__image">
 				</div>
 				<h3 class="slide__heading">
 					<a href="#" class="link link--title">
@@ -33,7 +33,7 @@ get_header();
 
 			<div class="slide">
 				<div class="slide__image-wrapper">
-					<img src="./img/index-slide-1.jpg" alt="" class="slide__image">
+					<img src="<?php bloginfo('template_url'); ?>/images/index-slide-1.jpg" alt="" class="slide__image">
 				</div>
 				<h3 class="slide__heading">
 					<a href="#" class="link link--title">
@@ -46,7 +46,7 @@ get_header();
 
 			<div class="slide">
 				<div class="slide__image-wrapper">
-					<img src="./img/index-slide-2.jpg" alt="" class="slide__image">
+					<img src="<?php bloginfo('template_url'); ?>/images/index-slide-2.jpg" alt="" class="slide__image">
 				</div>
 				<h3 class="slide__heading">
 					<a href="#" class="link link--title">
@@ -62,28 +62,28 @@ get_header();
 			<ul class="links-group__items">
 				<li class="links-group__item">
 					<div class="links-group__image logo-image">
-						<img src="./img/schoolars.jpg" alt="" class="logo-image__image">
+						<img src="<?php bloginfo('template_url'); ?>/images/schoolars.jpg" alt="" class="logo-image__image">
 					</div>
 					<a href="#" class="links-group__link link link--title">Школьникам</a>
 				</li>
 
 				<li class="links-group__item">
 					<div class="links-group__image logo-image">
-						<img src="./img/student.jpg" alt="" class="logo-image__image">
+						<img src="<?php bloginfo('template_url'); ?>/images/student.jpg" alt="" class="logo-image__image">
 					</div>
 					<a href="#" class="links-group__link link link--title">Студентам</a>
 				</li>
 
 				<li class="links-group__item">
 					<div class="links-group__image logo-image">
-						<img src="./img/parents.jpg" alt="" class="logo-image__image">
+						<img src="<?php bloginfo('template_url'); ?>/images/parents.jpg" alt="" class="logo-image__image">
 					</div>
 					<a href="#" class="links-group__link link link--title">Родителям</a>
 				</li>
 
 				<li class="links-group__item">
 					<div class="links-group__image logo-image">
-						<img src="./img/employeers.jpg" alt="" class="logo-image__image">
+						<img src="<?php bloginfo('template_url'); ?>/images/employeers.jpg" alt="" class="logo-image__image">
 					</div>
 					<a href="#" class="links-group__link link link--title">Ищущим работу</a>
 				</li>
@@ -108,28 +108,28 @@ get_header();
 				<ul class="links-group__items">
 					<li class="links-group__item">
 						<div class="links-group__image logo-image">
-							<img src="./img/boy.jpg" alt="" class="logo-image__image">
+							<img src="<?php bloginfo('template_url'); ?>/images/boy.jpg" alt="" class="logo-image__image">
 						</div>
 						<a href="#" class="links-group__link link link--title">11-13 лет</a>
 					</li>
 
 					<li class="links-group__item">
 						<div class="links-group__image logo-image">
-							<img src="./img/girl.jpg" alt="" class="logo-image__image">
+							<img src="<?php bloginfo('template_url'); ?>/images/girl.jpg" alt="" class="logo-image__image">
 						</div>
 						<a href="#" class="links-group__link link link--title">14-15 лет</a>
 					</li>
 
 					<li class="links-group__item">
 						<div class="links-group__image logo-image">
-							<img src="./img/teenage.jpg" alt="" class="logo-image__image">
+							<img src="<?php bloginfo('template_url'); ?>/images/teenage.jpg" alt="" class="logo-image__image">
 						</div>
 						<a href="#" class="links-group__link link link--title">16-17 лет</a>
 					</li>
 
 					<li class="links-group__item">
 						<div class="links-group__image logo-image">
-							<img src="./img/adult.jpg" alt="" class="logo-image__image">
+							<img src="<?php bloginfo('template_url'); ?>/images/adult.jpg" alt="" class="logo-image__image">
 						</div>
 						<a href="#" class="links-group__link link link--title">18 лет и старше</a>
 					</li>
@@ -191,55 +191,28 @@ get_header();
 							<h2 class="heading heading--section">Последние новости</h2>
 						</div>
 						<div class="col-auto">
-							<a href="" class="link link--icon link--icon--list">Все новости</a>
+							<a href="<?php echo site_url('/news'); ?>" class="link link--icon link--icon--list">Все новости</a>
 						</div>
 					</div>
 				</div>
 
 				<ul class="index-page__news-list">
-					<li class="news-item">
-						<div class="news-item__image logo-image logo-image--small">
-							<img src="./img/new-1.jpg" alt="" class="logo-image__image">
-						</div>
-						<div class="news-item__caption">
-							<span class="news-item__date">05.08.2018</span>
-							<a href="#" class="link">В Южно-Сахалинск прилетели более 400 участников чемпионата «Молодые
-								профессионалы»</a>
-						</div>
-					</li>
-
-					<li class="news-item">
-						<div class="news-item__image logo-image logo-image--small">
-							<img src="./img/new-2.jpg" alt="" class="logo-image__image">
-						</div>
-						<div class="news-item__caption">
-							<span class="news-item__date">05.08.2018</span>
-							<a href="#" class="link">В Южно-Сахалинск прилетели более 400 участников чемпионата «Молодые
-								профессионалы»</a>
-						</div>
-					</li>
-
-					<li class="news-item">
-						<div class="news-item__image logo-image logo-image--small">
-							<img src="./img/new-1.jpg" alt="" class="logo-image__image">
-						</div>
-						<div class="news-item__caption">
-							<span class="news-item__date">05.08.2018</span>
-							<a href="#" class="link">В Южно-Сахалинск прилетели более 400 участников чемпионата «Молодые
-								профессионалы»</a>
-						</div>
-					</li>
-
-					<li class="news-item">
-						<div class="news-item__image logo-image logo-image--small">
-							<img src="./img/new-2.jpg" alt="" class="logo-image__image">
-						</div>
-						<div class="news-item__caption">
-							<span class="news-item__date">05.08.2018</span>
-							<a href="#" class="link">В Южно-Сахалинск прилетели более 400 участников чемпионата «Молодые
-								профессионалы»</a>
-						</div>
-					</li>
+					<?php						
+					$lastNews = new WP_Query([
+						'posts_per_page' => 3,
+						'post_type' => 'new'
+					]);
+	
+					if (  $lastNews->have_posts() ) {
+						while ( $lastNews->have_posts() ) {
+							$lastNews->the_post();
+							echo '<li class="news-item">';
+							get_template_part( 'template-parts/content', get_post_type() );
+							echo '</li>';
+						}
+					}          
+					wp_reset_postdata();
+					?>
 				</ul>
 			</div>
 		</section>

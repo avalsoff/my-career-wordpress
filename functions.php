@@ -130,7 +130,7 @@ function my_career_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	wp_enqueue_script( 'my-career-main', get_template_directory_uri() . '/js/index.min.js', array(), '20151215', true );
+	wp_enqueue_script( 'my-career-main', get_template_directory_uri() . '/js/index.min.js', array('jquery'), microtime(), true );
 }
 add_action( 'wp_enqueue_scripts', 'my_career_scripts' );
 
@@ -153,6 +153,11 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Custom breadcrumbs
+ */
+require get_template_directory() . '/inc/breadcrumbs.php';
 
 /**
  * Load Jetpack compatibility file.
