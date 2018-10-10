@@ -18,44 +18,20 @@ get_header('index');
 <main class="page__main index-page">
 	<div class="container">
 		<section class="index-page__carousel">
-			<div class="slide">
-				<div class="slide__image-wrapper">
-					<img src="<?php bloginfo('template_url'); ?>/images/index-slide-1.jpg" alt="" class="slide__image">
-				</div>
-				<h3 class="slide__heading">
-					<a href="#" class="link link--title">
-						Неделя без турникетов
-					</a>
-				</h3>
-				<p class="slide__caption">В Сахалинской области для школьников с 16 по 22 октября 2017 года пройдет
-					всероссийская акция «Неделя без турникетов»</p>
-			</div>
+			<?php										
+				$indexAnnouncements = new WP_Query([
+					'posts_per_page' => -1,
+					'post_type' => 'announcement'
+				]);
 
-			<div class="slide">
-				<div class="slide__image-wrapper">
-					<img src="<?php bloginfo('template_url'); ?>/images/index-slide-1.jpg" alt="" class="slide__image">
-				</div>
-				<h3 class="slide__heading">
-					<a href="#" class="link link--title">
-						Нацфинал «Молодые профессионалы»
-					</a>
-				</h3>
-				<p class="slide__caption">В Сахалинской области для школьников с 16 по 22 октября 2017 года пройдет
-					всероссийская акция «Неделя без турникетов»</p>
-			</div>
-
-			<div class="slide">
-				<div class="slide__image-wrapper">
-					<img src="<?php bloginfo('template_url'); ?>/images/index-slide-2.jpg" alt="" class="slide__image">
-				</div>
-				<h3 class="slide__heading">
-					<a href="#" class="link link--title">
-						Нацфинал «Молодые профессионалы»
-					</a>
-				</h3>
-				<p class="slide__caption">В Сахалинской области для школьников с 16 по 22 октября 2017 года пройдет
-					всероссийская акция «Неделя без турникетов»</p>
-			</div>
+				if (  $indexAnnouncements->have_posts() ) {
+					while ( $indexAnnouncements->have_posts() ) {
+						$indexAnnouncements->the_post();
+						get_template_part( 'template-parts/content', get_post_type() );
+					}
+				}          
+				wp_reset_postdata();
+			?>
 		</section>
 
 		<section class="index-page__links-group links-group">
