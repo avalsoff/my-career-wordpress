@@ -67,7 +67,7 @@
                   </a>
                 </li>
                 <li class="top-nav__item">
-                  <a href="#" class="top-nav__link top-nav__link--icon top-nav__link--icon--search">
+                  <a href="<?php echo site_url('/search'); ?>" class="top-nav__link top-nav__link--icon top-nav__link--icon--search">
                   </a>
                 </li>
               </ul>
