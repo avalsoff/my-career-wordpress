@@ -119,13 +119,13 @@ get_header('index');
 				<div class="section-header">
 					<div class="row">
 						<div class="col-auto">
-							<h2 class="heading heading--section">Полезные ссылки</h2>
+							<h2 class="heading heading--section">Интересные ссылки</h2>
 						</div>
 					</div>
 				</div>
 
-				<div class="text text--list text--with-bg text--left-border">
-					<ul class="text__list">
+				<div class="text text--list text--with-bg text--left-border generic-content">
+					<!-- <ul class="text__list">
 						<li class="text__list-item">Профессиональная ориентация
 							<a href="#" class="link">(просмотреть)</a>
 						</li>
@@ -155,7 +155,8 @@ get_header('index');
 						<li class="text__list-item">Федеральный закон N 273-ФЗ "Об образовании в Российской Федерации"
 							<a href="#" class="link">(скачать)</a>
 						</li>
-					</ul>
+          </ul> -->
+          <?php the_field('interesting_links') ?>
 				</div>
 
 			</div>
@@ -179,7 +180,7 @@ get_header('index');
 						'post_type' => 'new'
 					]);
 	
-					if (  $lastNews->have_posts() ) {
+					if ( $lastNews->have_posts() ) {
 						while ( $lastNews->have_posts() ) {
 							$lastNews->the_post();
 							echo '<li class="news-item">';

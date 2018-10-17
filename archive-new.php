@@ -28,7 +28,9 @@ get_header();
           if ( have_posts() ) {
             while ( have_posts() ) {
               the_post();
+              echo '<li class="news-item col-xl-4 col-md-6">';
               get_template_part( 'template-parts/content', get_post_type() );
+              echo '</li>';
             }
           }
           wp_reset_postdata();
@@ -41,13 +43,15 @@ get_header();
       'type' => 'array'
     ]);
 
-    echo '<ul class="pagination">';
-    foreach ($pagination as $link) {
-      echo '<li class="pagination__item">';
-      echo $link;
-      echo '</li>';
+    if ($pagination) {
+      echo '<ul class="pagination">';
+      foreach ($pagination as $link) {
+        echo '<li class="pagination__item">';
+        echo $link;
+        echo '</li>';
+      }
+      echo '</ul>';
     }
-    echo '</ul>';    
     ?>
   </div>
 </main>
