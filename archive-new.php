@@ -13,12 +13,14 @@ get_header();
 
 <main class="news-page">
   <div class="container">
-    <?php pageBreadcrumbps([
-      [
-        'href'  => '/',
-        'title' => 'Главная'
-      ]
-    ]); ?>
+    <?php 
+      pageBreadcrumbps([
+        [
+          'href'  => '/',
+          'title' => 'Главная'
+        ]
+      ]); 
+    ?>
 
     <h1 class="heading heading--page">Новости</h1>
 
