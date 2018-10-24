@@ -20,7 +20,7 @@ get_header();
       ]
     ]); ?>
 
-    <h1 class="heading heading--page">Результаты поиска</h1>
+    <h1 class="heading heading--page">Результаты поиска "<?php echo get_search_query() ?>"</h1>
 		
 		<?php 
 			get_search_form();
