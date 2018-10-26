@@ -40,7 +40,7 @@ the_post();
       <div class="new-item-page__section-header section-header">
         <div class="row justify-content-between align-items-baseline">
           <div class="col-auto">
-            <h2 class="heading heading--section">Другие новости</h2>
+            <h2 class="heading heading--section">Последние новости</h2>
           </div>
           <div class="col-auto">
             <a href="<?php echo site_url('/news') ?>" class="link link--icon link--icon--list link--icon--small">Все новости</a>
