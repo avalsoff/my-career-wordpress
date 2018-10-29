@@ -30,7 +30,7 @@ the_post();
     <h1 class="profs-item-page__heading heading heading--page"><?php the_title() ?></h1>
 
     <small class="profs-item-page__heading-info">
-      Информация по состоянию на 8 августа 2018
+      Информация по состоянию на <?php the_date('j F Y') ?>
     </small>
 
     <div class="profs-item-page__text-with-photo">
@@ -118,43 +118,47 @@ the_post();
     </ul>
     <div class="profs-item-page__container">
       <?php
-        $posts = get_field('where_to_learn');
-        $allTerms = get_terms([
-          'taxonomy' => 'edu_level'
-        ]);
-        $viewModel = [];
-        foreach ($allTerms as $term) {
-          $viewModel[$term->slug] = [
-            'id' => $term->term_id,
-            'name' => $term->name,
-            'posts' => []
-          ];
-        }
-        foreach ($viewModel as $key => $eduLevel) {
-          foreach ($posts as $currentPost) {
-            $eduLevelsOfPost = wp_get_post_terms($currentPost->ID, 'edu_level');
-            foreach ($eduLevelsOfPost as $eduLevelOfPost) {
-              if ($eduLevelOfPost->term_id == $eduLevel['id']) {
-                $viewModel[$key]['posts'][] = $currentPost;
+        $learnPosts = get_field('where_to_learn');
+        if ($learnPosts) {
+          $allTerms = get_terms([
+            'taxonomy' => 'edu_level'
+          ]);
+          $viewModel = [];
+          foreach ($allTerms as $term) {
+            $viewModel[$term->slug] = [
+              'id' => $term->term_id,
+              'name' => $term->name,
+              'posts' => []
+            ];
+          }
+          foreach ($viewModel as $key => $eduLevel) {
+            foreach ($learnPosts as $currentPost) {
+              $eduLevelsOfPost = wp_get_post_terms($currentPost->ID, 'edu_level');
+              foreach ($eduLevelsOfPost as $eduLevelOfPost) {
+                if ($eduLevelOfPost->term_id == $eduLevel['id']) {
+                  $viewModel[$key]['posts'][] = $currentPost;
+                }
               }
             }
-          }
-        }        
+          }        
+        }
       ?>
       <section class="text text--with-bg text--wide-list profs-item-page__list ">
-        <h2 class="text__heading">Где можно учиться</h2>
         <?php 
-          foreach ($viewModel as $eduLevel) {
-            if ($eduLevel['posts']) {
-              echo '<i class="prof-description__list-heading">' . $eduLevel['name'] . '</i>';
-              echo '<ul class="prof-description__list">';
-              foreach ($eduLevel['posts'] as $currentPost) {
-                $postId = $currentPost->ID;
-                echo '<li><a href="'. get_permalink($postId) .'" class="link">' . get_the_title($postId) . '</a></li>';
+          if ($viewModel) {
+            echo '<h2 class="text__heading">Где можно учиться</h2>';
+            foreach ($viewModel as $eduLevel) {
+              if ($eduLevel['posts']) {
+                echo '<i class="prof-description__list-heading">' . $eduLevel['name'] . '</i>';
+                echo '<ul class="prof-description__list">';
+                foreach ($eduLevel['posts'] as $currentPost) {
+                  $postId = $currentPost->ID;
+                  echo '<li><a href="'. get_permalink($postId) .'" class="link">' . get_the_title($postId) . '</a></li>';
+                }
+                echo '</ul>';
               }
-              echo '</ul>';
-            }
-          } 
+            } 
+          }
         ?>
       </section>
 

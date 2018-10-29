@@ -36,23 +36,17 @@ the_post();
 
     <div class="edu-item-page__container">
       <section class="edu-item-page__carousel slick--medium">
-        <div class="slide slide--medium">
-          <div class="slide__image-wrapper">
-            <img src="<?php bloginfo('template_url'); ?>/images/edu-slide.jpg" alt="" class="slide__image">
-          </div>
-        </div>
-
-        <div class="slide slide--medium">
-          <div class="slide__image-wrapper">
-            <img src="<?php bloginfo('template_url'); ?>/images/edu-slide.jpg" alt="" class="slide__image">
-          </div>
-        </div>
-
-        <div class="slide slide--medium">
-          <div class="slide__image-wrapper">
-            <img src="<?php bloginfo('template_url'); ?>/images/edu-slide.jpg" alt="" class="slide__image">
-          </div>
-        </div>
+        <?php 
+          $images = get_field('edu_images');
+          foreach ($images as $image) { ?>
+            <div class="slide slide--medium">
+              <div class="slide__image-wrapper">
+                <img src="<?php echo $image['image']['url'] ?>" alt="<?php echo $image['image']['alt'] ?>" class="slide__image">
+              </div>
+            </div>
+        <?php
+          }
+        ?>
       </section>
 
       <article class="edu-item-page__info">
