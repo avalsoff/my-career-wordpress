@@ -121,6 +121,7 @@ add_action( 'widgets_init', 'my_career_widgets_init' );
  */
 function my_career_scripts() {
 	wp_enqueue_style( 'my-career-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic', false );
 
 	wp_enqueue_script( 'my-career-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
