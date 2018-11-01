@@ -13,7 +13,13 @@
  */
 
 get_header();
+the_post();
 ?>
+
+<pre>
+  <?php
+  ?>
+</pre>
 
 <main class="economy-page">
   <div class="container">
@@ -23,7 +29,9 @@ get_header();
       </li>
     </ul>
 
-    <h1 class="heading heading--page">Экономика и рынок труда</h1>
+    <h1 class="heading heading--page">
+      <?php the_title() ?>
+    </h1>
 
 
     <ul class="tabs">
@@ -55,7 +63,9 @@ get_header();
               <th>Численность населения</th>
             </tr>
             <tr>
-              <td class="chart-info__value">4765,7 тыс. чел</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_population') ?>
+              </td>
             </tr>
           </table>
 
@@ -65,11 +75,15 @@ get_header();
             </tr>
             <tr>
               <td class="chart-info__key">Вузов:</td>
-              <td class="chart-info__value">5</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_education')['universities_number'] ?>
+              </td>
             </tr>
             <tr>
               <td class="chart-info__key">Колледжей:</td>
-              <td class="chart-info__value">58</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_education')['collegues_number'] ?>
+              </td>
             </tr>
           </table>
 
@@ -78,7 +92,9 @@ get_header();
               <th>Работодатели</th>
             </tr>
             <tr>
-              <td class="chart-info__value">90 590</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_enterprises_number') ?>
+              </td>
               <td class="chart-info__key">предприятий</td>
             </tr>
           </table>
@@ -87,18 +103,22 @@ get_header();
             <tr>
               <th>Прирост (убыль) населения</th>
             </tr>
+
+            <?php 
+              $populationGrowth = get_field('main_growth');
+              foreach ($populationGrowth as $row) : ?>
             <tr>
-              <td class="chart-info__key">2016:</td>
-              <td class="chart-info__value">487 293 <span class="chart-info__arrow-down">↘</span></td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1][0] ?>
+                <span class="chart-info__arrow-<?php echo $row[1][1] == 'up' ? 'up' : 'down' ?>">
+                  <?php echo $row[1][1] == 'up' ? '↗' : '↘' ?>
+                </span>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">2017:</td>
-              <td class="chart-info__value">487 344 <span class="chart-info__arrow-up">↗</span></td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">2018:</td>
-              <td class="chart-info__value">490 181 <span class="chart-info__arrow-up">↗</span></td>
-            </tr>
+            <?php endforeach; ?>
           </table>
 
 
@@ -106,42 +126,44 @@ get_header();
             <tr>
               <th colspan="2">Региональная миграция населения</th>
             </tr>
+
+            <?php 
+              $regMigration = get_field('main_reg_migration');
+              foreach ($regMigration as $row) : ?>
             <tr>
-              <td class="chart-info__key">2016:</td>
-              <td class="chart-info__value">+100</td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">2017:</td>
-              <td class="chart-info__value">-50</td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">2018:</td>
-              <td class="chart-info__value">+84</td>
-            </tr>
+            <?php endforeach; ?>
           </table>
 
           <table class="chart-info">
             <tr>
               <th colspan="2">Зарубежная миграция населения</th>
             </tr>
+
+            <?php 
+              $migration = get_field('main_migration');
+              foreach ($migration as $row) : ?>
             <tr>
-              <td class="chart-info__key">2016:</td>
-              <td class="chart-info__value">+100</td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">2017:</td>
-              <td class="chart-info__value">-50</td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">2018:</td>
-              <td class="chart-info__value">+84</td>
-            </tr>
+            <?php endforeach; ?>
           </table>
         </div>
 
         <div class="col-md-6 economy-page__map">
           <div class="economy-page__map-wrapper">
-            <img src="./images/map-simple.svg" alt="" class="economy-page__map-image">
+            <img src="<?php bloginfo('template_url'); ?>/images/map-simple.svg" alt="" class="economy-page__map-image">
           </div>
         </div>
 
@@ -152,7 +174,9 @@ get_header();
               <th>Площадь территории</th>
             </tr>
             <tr>
-              <td class="chart-info__value">4765,7 тыс. чел</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_area') ?> тыс. км<sup>2</sup>
+              </td>
             </tr>
           </table>
 
@@ -160,72 +184,76 @@ get_header();
             <tr>
               <th>Национальная структура населения</th>
             </tr>
+
+            <?php 
+              $populationStructure = get_field('main_population_structure');
+              foreach ($populationStructure as $row) : ?>
             <tr>
-              <td class="chart-info__key">Русские:</td>
-              <td class="chart-info__value">90,3%</td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">Корейцы:</td>
-              <td class="chart-info__value">10%</td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">Другие:</td>
-              <td class="chart-info__value">1.7%</td>
-            </tr>
+            <?php endforeach; ?>
           </table>
 
           <table class="chart-info">
             <tr>
               <th>Наиболее крупные города (чел.)</th>
             </tr>
+
+            <?php 
+              $bigCities = get_field('main_big_cities');
+              foreach ($bigCities as $row) : ?>
             <tr>
-              <td class="chart-info__key">Южно-Сахалинск:</td>
-              <td class="chart-info__value">198 973</td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">Корсаков:</td>
-              <td class="chart-info__value">33 203</td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">Холмск:</td>
-              <td class="chart-info__value">27 954</td>
-            </tr>
+            <?php endforeach; ?>
           </table>
 
           <table class="chart-info">
             <tr>
               <th colspan="2">Переподготовка кадров</th>
             </tr>
+
+            <?php 
+              $retrain = get_field('main_retrain');
+              foreach ($retrain as $row) : ?>
             <tr>
-              <td class="chart-info__key">2016:</td>
-              <td class="chart-info__value">7 293</td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">2017:</td>
-              <td class="chart-info__value">7 344</td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">2018:</td>
-              <td class="chart-info__value">9 181</td>
-            </tr>
+            <?php endforeach; ?>
           </table>
 
           <table class="chart-info">
             <tr>
               <th colspan="2">Количество выпускников</th>
             </tr>
+
+            <?php 
+              $graduateNumber = get_field('main_graduate_count');
+              foreach ($graduateNumber as $row) : ?>
             <tr>
-              <td class="chart-info__key">2016:</td>
-              <td class="chart-info__value">7 293</td>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
             </tr>
-            <tr>
-              <td class="chart-info__key">2017:</td>
-              <td class="chart-info__value">7 344</td>
-            </tr>
-            <tr>
-              <td class="chart-info__key">2018:</td>
-              <td class="chart-info__value">9 181</td>
-            </tr>
+            <?php endforeach; ?>
           </table>
         </div>
 
@@ -238,8 +266,30 @@ get_header();
       <div class="economy-page__container">
         <h2 class="visually-hidden">Рейтинги</h2>
 
-        <div class="js-chart" data-chart='{"type":"bar","categories":["среднемесячная номинальная заработная плата","валовой региональный продукт на душу населения","среднедушевой доход","инвестиции в капитал на душу населения","численность населения","уровень безработицы","площадь территории"],"data":[42,31,23,42,31,23,48]}'>
-        </div>
+        <?php 
+          $ratingChart = [
+            'type' => 'bar',
+            'categories' => [
+              'среднемесячная номинальная заработная плата',
+              'валовой региональный продукт на душу населения',
+              'среднедушевой доход',
+              'инвестиции в капитал на душу населения',
+              'численность населения',
+              'уровень безработицы',
+              'площадь территории'
+            ],
+            'data' => [
+              get_field('avarage_salary'),
+              get_field('regional_gross_per_capita'),
+              get_field('average_income_per_capita'),
+              get_field('capital_investment_per_capita'),
+              get_field('rating_population'),
+              get_field('unemployment_rate'),
+              get_field('rating_area'),
+            ]
+          ];
+        ?>
+        <div class="js-chart" data-chart='<?php echo json_encode($ratingChart, JSON_NUMERIC_CHECK) ?>'></div>
       </div>
     </section>
 
@@ -295,74 +345,37 @@ get_header();
       <div class="economy-page__container">
         <h2 class="visually-hidden">ТОРы</h2>
 
-        <h3 class="economy-page__tocer-heading">ТОСЭР «Горный воздух»</h3>
-        <img class="economy-page__wide-img" src="./images/tocer-mountain-air.jpg">
+        <?php 
+          $tors = get_field('tors');
+          
+          foreach ($tors as $tor) :?>
+        <h3 class="economy-page__tocer-heading">
+          <?php echo $tor['tor_name'] ?>
+        </h3>
+        <img class="economy-page__wide-img" src="<?php echo $tor['tor_image']['url'] ?>">
 
         <table class="table economy-page__table" cellspacing="0">
           <tr>
             <td class="table__heading">Официальный сайт</td>
-            <td class="table__data"><a href="#" class="link">http://resident-sakhalin.ru/ru_RU/тор_горный_воздух/</a></td>
+            <td class="table__data"><a href="<?php echo $tor['tor_site'] ?>" class="link">
+                <?php echo $tor['tor_site'] ?></a></td>
             </td>
           </tr>
           <tr>
             <td class="table__heading">Ключевые отрасли:</td>
-            <td class="table__data">Туризм, спорт, рекреация</td>
+            <td class="table__data">
+              <?php echo $tor['tor_key_industries'] ?>
+            </td>
           </tr>
           <tr>
             <td class="table__heading">География:</td>
             <td class="table__data">
-              Муниципальное образование «Городской округ Южно-Сахалинск». Общая
-              площадь 20300 гек.
+              <?php echo $tor['tor_geography'] ?>
             </td>
           </tr>
         </table>
 
-
-        <h3 class="economy-page__tocer-heading">ТОСЭР «Южный»</h3>
-        <img class="economy-page__wide-img" src="./images/toc-south.jpg">
-
-        <table class="table economy-page__table" cellspacing="0">
-          <tr>
-            <td class="table__heading">Официальный сайт</td>
-            <td class="table__data"><a href="#" class="link">http://resident-sakhalin.ru/ru_RU/тор-южная/</a></td>
-            </td>
-          </tr>
-          <tr>
-            <td class="table__heading">Ключевые отрасли:</td>
-            <td class="table__data">Мясное и молочное животноводство, мясопереработка, овощеводство</td>
-          </tr>
-          <tr>
-            <td class="table__heading">География:</td>
-            <td class="table__data">
-              Муниципальные образования «Городской округ Южно-Сахалинск», «Анивский  городской округ», «Томаринский
-              городской округ». Общая площадь 36800 гек.
-            </td>
-          </tr>
-        </table>
-
-
-        <h3 class="economy-page__tocer-heading">ТОСЭР «Курилы»</h3>
-        <img class="economy-page__wide-img" src="./images/tocer-Kurili.jpg">
-
-        <table class="table economy-page__table" cellspacing="0">
-          <tr>
-            <td class="table__heading">Официальный сайт</td>
-            <td class="table__data"><a href="#" class="link">http://resident-sakhalin.ru/ru_RU/тор-курилы/</a></td>
-            </td>
-          </tr>
-          <tr>
-            <td class="table__heading">Ключевые отрасли:</td>
-            <td class="table__data">Рыбопромышленный комплекс и туризм</td>
-          </tr>
-          <tr>
-            <td class="table__heading">География:</td>
-            <td class="table__data">
-              Село «Малокурильское» муниципального образования «Южно-Курильский  городской округ» Сахалинской области
-              и
-              состоит из одной площадки. Общая площадь 12 гек.
-            </td>
-          </tr>
-        </table>
+        <?php endforeach; ?>
       </div>
 
 
@@ -370,7 +383,7 @@ get_header();
 
     <section class="js-section-tab5 economy-page__tab-content">
       <div class="economy-page__container">
-        <h2 class="visually-hidden">Муниципальное образование</h2>
+        <h2 class="visually-hidden">Муниципальные образования</h2>
       </div>
       <div class="row">
         <div class="offset-1 col-lg-6">
@@ -478,6 +491,54 @@ get_header();
         </div>
       </div>
       <div class="js-tabs economy-page__container">
+        <?php           
+          $municipalities = new WP_Query([
+            'posts_per_page' => -1,
+            'post_type' => 'municipality'
+          ]);
+
+          $munsPostIdToTabId = [
+            '323' => 1,
+            '327' => 5,
+            '328' => 10,
+            '329' => 14,
+            '330' => 20,
+            '331' => 12,
+            '332' => 16,
+            '333' => 21,
+            '334' => 15,
+            '335' => 19,
+            '336' => 17,
+            '337' => 8,
+            '338' => 13,
+            '339' => 3,
+            '340' => 9,
+            '341' => 11,
+            '342' => 7,
+            '343' => 18,
+          ];
+
+          if ( $municipalities->have_posts() ) {
+            // while ($municipalities->have_posts() ) {
+              $municipalities->the_post();
+
+              
+              $munIndicators = get_field('mun_graphs');
+              $munIndicators = array_filter($munIndicators, function($el) {
+                return $el !== NULL;
+              });
+
+              foreach ($munIndicators as $key => $indicator) {
+                $munIndicators[$key] = array_reverse(
+                  call_user_func_array(
+                    'array_map',
+                    array(-1 => null) + array_map('array_reverse', $indicator)
+                  )
+                );
+              }
+            // }
+          }
+        ?>
         <div class="js-map-tab1 economy-page__region-tab active js-tab">
           <section class="text text--text">
             <h3 class="text__heading">
@@ -575,14 +636,22 @@ get_header();
             <a class="js-chartgroup-tab4 chart-group__link js-chartgroup-tab-button link">миграционный прирост, убыль</a>
           </div>
           <div class="chart-group__tabs">
-            <div class="js-chartgroup-tab1 js-chart chart-group__tab active" data-chart='{"type":"column","categories":["среднемесячная номинальная заработная плата","валовой региональный продукт на душу населения","среднедушевой доход","инвестиции в капитал на душу населения","численность населения","уровень безработицы","площадь территории"],"data":[42,31,23,42,31,23,48]}'>
-            </div>
-            <div class="js-chartgroup-tab2 js-chart chart-group__tab" data-chart='{"type":"column","categories":["среднемесячная номинальная заработная плата","валовой региональный продукт на душу населения","среднедушевой доход","инвестиции в капитал на душу населения","численность населения","уровень безработицы","площадь территории"],"data":[32,31,23,42,31,23,48]}'>
-            </div>
-            <div class="js-chartgroup-tab3 js-chart chart-group__tab" data-chart='{"type":"column","categories":["среднемесячная номинальная заработная плата","валовой региональный продукт на душу населения","среднедушевой доход","инвестиции в капитал на душу населения","численность населения","уровень безработицы","площадь территории"],"data":[22,31,23,42,31,23,48]}'>
-            </div>
-            <div class="js-chartgroup-tab4 js-chart chart-group__tab" data-chart='{"type":"column","categories":["среднемесячная номинальная заработная плата","валовой региональный продукт на душу населения","среднедушевой доход","инвестиции в капитал на душу населения","численность населения","уровень безработицы","площадь территории"],"data":[12,31,23,42,31,23,48]}'>
-            </div>
+            <?php              
+              $munChartOptions = [
+                'type' => 'column',
+                'categories' => null,
+                'data' => null
+              ];
+
+              $j = 1;
+              foreach ($munIndicators as $indicator) {
+                $munChartOptions['categories'] = $indicator[0];
+                $munChartOptions['data'] = $indicator[1];
+                $active = $j == 1 ? 'active' : '';
+                echo '<div class="js-chartgroup-tab' . $j . ' js-chart chart-group__tab ' . $active . '" data-chart=\'' . json_encode($munChartOptions, JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK) . '\'></div>';
+                $j++;
+              }
+            ?>
           </div>
         </div>
       </div>
