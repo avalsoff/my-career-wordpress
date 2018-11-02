@@ -23,11 +23,14 @@ the_post();
 
 <main class="economy-page">
   <div class="container">
-    <ul class="breadcrumbs">
-      <li class="breadcrumbs__item">
-        <a href="#" class="breadcrumbs__link link">главная</a>
-      </li>
-    </ul>
+    <?php 
+      pageBreadcrumbps([
+        [
+          'href'  => '/',
+          'title' => 'Главная'
+        ]
+      ]); 
+    ?>
 
     <h1 class="heading heading--page">
       <?php the_title() ?>
@@ -519,141 +522,109 @@ the_post();
           ];
 
           if ( $municipalities->have_posts() ) {
-            // while ($municipalities->have_posts() ) {
+            while ($municipalities->have_posts() ) {
               $municipalities->the_post();
-
-              
-              $munIndicators = get_field('mun_graphs');
-              $munIndicators = array_filter($munIndicators, function($el) {
-                return $el !== NULL;
-              });
-
-              foreach ($munIndicators as $key => $indicator) {
-                $munIndicators[$key] = array_reverse(
-                  call_user_func_array(
-                    'array_map',
-                    array(-1 => null) + array_map('array_reverse', $indicator)
-                  )
-                );
-              }
-            // }
-          }
+              $tabId = $munsPostIdToTabId[get_the_ID()];              
+              $active = $tabId == 1 ? 'active' : '';
         ?>
-        <div class="js-map-tab1 economy-page__region-tab active js-tab">
-          <section class="text text--text">
-            <h3 class="text__heading">
-              Город Южно-Сахалинск
-            </h3>
-            Город Южно-Сахалинск СО расположено в северной части и является самым северным районом. Территория
-            Лоухского района самая большая. В составе входят 3 городских и 4 сельских поселения. Район имеет реальные
-            предпосылки для экономического роста, прежде всего это природные ресурсы, транспортная сеть, уникальные
-            природные объекты и ландшафты.
-            <div class="table__wrapper economy-page__region-table">
-              <table class="table" cellspacing="0">
-                <tr>
-                  <td class="table__heading">Административный центр:</td>
-                  <td class="table__data">город Южно-Сахалинск</td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Официальный сайт:</td>
-                  <td class="table__data">
-                    <a class="link" href="https://yuzhno-sakh.ru">https://yuzhno-sakh.ru</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Численность населения:</td>
-                  <td class="table__data">206140 человек (на 01.01.2018 г.)</td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Площадь территории:</td>
-                  <td class="table__data">905,02 кв. км</td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Плотность населения:</td>
-                  <td class="table__data">227 человек на кв. км</td>
-                </tr>
-              </table>
-            </div>
-            Основные отрасли производства в районе — лесозаготовительная, деревообрабатывающая и горнодобывающая.
-            Предприятия лесного комплекса производят деловую древесину, пиломатериалы, технологическую щепу, шпалы
-            широкой колеи и пр. Развитие горнопромышленного комплекса района в основном связано с освоением
-            минерально-сырьевых ресурсов кварц-полевого шпатового сырья, блочного камня, сырья для производства
-            керамики, слюды-мусковита, металлов платиновой группы, золота, гранатов, кианита, апатита.
-            <hr class="hr economy-page__hr">
-          </section>
-        </div>
-        <div class="js-map-tab19 economy-page__region-tab js-tab">
-          <section class="text text--text">
-            <h3 class="text__heading">
-              Охинский городской округ
-            </h3>
-            Город Южно-Сахалинск СО расположено в северной части и является самым северным районом. Территория
-            Лоухского района самая большая. В составе входят 3 городских и 4 сельских поселения. Район имеет реальные
-            предпосылки для экономического роста, прежде всего это природные ресурсы, транспортная сеть, уникальные
-            природные объекты и ландшафты.
-            <div class="table__wrapper economy-page__region-table">
-              <table class="table" cellspacing="0">
-                <tr>
-                  <td class="table__heading">Административный центр:</td>
-                  <td class="table__data">город Оха</td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Официальный сайт:</td>
-                  <td class="table__data">
-                    <a class="link" href="https://yuzhno-sakh.ru">https://yuzhno-sakh.ru</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Численность населения:</td>
-                  <td class="table__data">206140 человек (на 01.01.2018 г.)</td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Площадь территории:</td>
-                  <td class="table__data">905,02 кв. км</td>
-                </tr>
-                <tr>
-                  <td class="table__heading">Плотность населения:</td>
-                  <td class="table__data">227 человек на кв. км</td>
-                </tr>
-              </table>
-            </div>
-            Основные отрасли производства в районе — лесозаготовительная, деревообрабатывающая и горнодобывающая.
-            Предприятия лесного комплекса производят деловую древесину, пиломатериалы, технологическую щепу, шпалы
-            широкой колеи и пр. Развитие горнопромышленного комплекса района в основном связано с освоением
-            минерально-сырьевых ресурсов кварц-полевого шпатового сырья, блочного камня, сырья для производства
-            керамики, слюды-мусковита, металлов платиновой группы, золота, гранатов, кианита, апатита.
-            <hr class="hr economy-page__hr">
-          </section>
-        </div>
-        <div class="chart-group">
-          <div class="chart-group__links">
-            <a class="js-chartgroup-tab1 chart-group__link js-chartgroup-tab-button link active">распределение
-              населения по возрастным группам</a>
-            <a class="js-chartgroup-tab2 chart-group__link js-chartgroup-tab-button link">количество крупных и
-              средних предприятий</a>
-            <a class="js-chartgroup-tab3 chart-group__link js-chartgroup-tab-button link">среднемесячная заработная
-              плата</a>
-            <a class="js-chartgroup-tab4 chart-group__link js-chartgroup-tab-button link">миграционный прирост, убыль</a>
-          </div>
-          <div class="chart-group__tabs">
-            <?php              
-              $munChartOptions = [
-                'type' => 'column',
-                'categories' => null,
-                'data' => null
-              ];
+              <div class="js-map-tab<?php echo $tabId ?> economy-page__region-tab <?php echo $active ?> js-tab">
+                <section class="text text--text">
+                  <h3 class="text__heading">
+                    <?php the_title() ?>
+                  </h3>
+                  <?php the_content() ?>
+                  <div class="table__wrapper economy-page__region-table">
+                    <table class="table" cellspacing="0">
+                      <tr>
+                        <td class="table__heading">Административный центр:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_center') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Официальный сайт:</td>
+                        <td class="table__data">
+                          <a class="link" href="<?php echo get_field('mun_site') ?>">
+                            <?php echo get_field('mun_site') ?>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Численность населения:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_population') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Площадь территории:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_area') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Плотность населения:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_density') ?>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <?php echo get_field('mun_bottom_text') ?>
 
-              $j = 1;
-              foreach ($munIndicators as $indicator) {
-                $munChartOptions['categories'] = $indicator[0];
-                $munChartOptions['data'] = $indicator[1];
-                $active = $j == 1 ? 'active' : '';
-                echo '<div class="js-chartgroup-tab' . $j . ' js-chart chart-group__tab ' . $active . '" data-chart=\'' . json_encode($munChartOptions, JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK) . '\'></div>';
-                $j++;
-              }
-            ?>
-          </div>
-        </div>
+                  <hr class="hr economy-page__hr">
+
+                  <?php 
+                  $munIndicators = get_field('mun_graphs');
+                  $munIndicators = array_filter($munIndicators, function($el) {
+                    return $el !== NULL;
+                  });
+
+                  foreach ($munIndicators as $key => $indicator) {
+                    $munIndicators[$key] = array_reverse(
+                      call_user_func_array(
+                        'array_map',
+                        array(-1 => null) + array_map('array_reverse', $indicator)
+                      )
+                    );
+                  }
+                  ?>
+                  <div class="chart-group">
+                    <div class="chart-group__links">
+                      <a class="js-chartgroup-tab1 chart-group__link js-chartgroup-tab-button link active">распределение
+                        населения по возрастным группам</a>
+                      <a class="js-chartgroup-tab2 chart-group__link js-chartgroup-tab-button link">количество крупных и
+                        средних предприятий</a>
+                      <a class="js-chartgroup-tab3 chart-group__link js-chartgroup-tab-button link">среднемесячная заработная
+                        плата</a>
+                      <a class="js-chartgroup-tab4 chart-group__link js-chartgroup-tab-button link">миграционный прирост,
+                        убыль</a>
+                    </div>
+                    <div class="chart-group__tabs">
+                      <?php              
+                      $munChartOptions = [
+                        'type' => 'column',
+                        'categories' => null,
+                        'data' => null
+                      ];
+
+                      $j = 1;
+                      foreach ($munIndicators as $indicator) {
+                        $munChartOptions['categories'] = $indicator[0];
+                        $munChartOptions['data'] = $indicator[1];
+                        $active = $j == 1 ? 'active' : '';
+                        echo '<div class="js-chartgroup-tab' . $j . ' js-chart chart-group__tab ' . $active . '" data-chart=\'' . json_encode($munChartOptions, JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK) . '\'></div>';
+                        $j++;
+                      }
+                    ?>
+                    </div>
+                  </div>
+                </section>
+              </div>
+        <?php 
+            }
+          }
+          wp_reset_postdata();
+        ?>
       </div>
     </section>
 
