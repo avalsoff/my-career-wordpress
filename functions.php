@@ -7,7 +7,7 @@
  * @package My_Career
  */
 
-if ( ! function_exists( 'my_career_setup' ) ) :
+// if ( ! function_exists( 'my_career_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -43,9 +43,15 @@ if ( ! function_exists( 'my_career_setup' ) ) :
 		add_theme_support( 'post-thumbnails' );
 
 		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'my-career' ),
-		) );
+		// register_nav_menus([
+		// 	'headerTopMenu' 		=> 'Верхнее меню шапки',
+		// 	'headerBottomMenu' 	=> 'Нижнее меню шапки',
+		// 	'footerMenu'				=> 'Меню подвала'					
+		// ]);
+
+		register_nav_menu('headerTopMenu', 'Верхнее меню шапки');
+		register_nav_menu('headerBottomMenu', 'Нижнее меню шапки');
+		register_nav_menu('footerMenu', 'Меню подвала');
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -80,7 +86,7 @@ if ( ! function_exists( 'my_career_setup' ) ) :
 			'flex-height' => true,
 		) );
 	}
-endif;
+// endif;
 add_action( 'after_setup_theme', 'my_career_setup' );
 
 /**
