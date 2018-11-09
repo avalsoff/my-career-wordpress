@@ -7,6 +7,14 @@
  * @package My_Career
  */
 
+function my_career_query_vars($vars) {
+	$vars[] = 'region';
+	$vars[] = 'prof';
+	return $vars;
+}
+add_filter('query_vars', 'my_career_query_vars');
+
+
 // if ( ! function_exists( 'my_career_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
