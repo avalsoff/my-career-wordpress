@@ -101,7 +101,7 @@ get_header();
           </header>
           <main class="folder__profs">
             <ul class="folder__profs-list">
-              <?php foreach ($viewModel[0] ?? [] as $item) : ?>
+              <?php foreach ($viewModel[0] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
                   echo $byProfs ? $idToMun[$item] : get_the_title($item) 
@@ -119,7 +119,7 @@ get_header();
           </header>
           <main class="folder__profs">
             <ul class="folder__profs-list">
-              <?php foreach ($viewModel[1] ?? [] as $item) : ?>
+              <?php foreach ($viewModel[1] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
                   echo $byProfs ? $idToMun[$item] : get_the_title($item) 
@@ -137,7 +137,7 @@ get_header();
           </header>
           <main class="folder__profs">
             <ul class="folder__profs-list">
-              <?php foreach ($viewModel[2] ?? [] as $item) : ?>
+              <?php foreach ($viewModel[2] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
                   echo $byProfs ? $idToMun[$item] : get_the_title($item) 

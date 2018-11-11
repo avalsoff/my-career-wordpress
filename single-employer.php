@@ -50,6 +50,18 @@ the_post();
         <div class="table__wrapper">
           <table class="table" cellspacing="0">
             <tr>
+              <td class="table__heading">Руководитель:</td>
+              <td class="table__data">
+                <?php echo get_field('director') ?>
+              </td>
+            </tr>
+            <tr>
+              <td class="table__heading">Начальник отдела кадров:</td>
+              <td class="table__data">
+                <?php echo get_field('hr_chief') ?>
+              </td>
+            </tr>
+            <tr>
               <td class="table__heading">Адрес:</td>
               <td class="table__data">
                 <?php echo get_field('address') ?>
