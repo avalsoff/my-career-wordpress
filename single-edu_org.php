@@ -58,7 +58,7 @@ the_post();
         </section>
         <section class="text text--text">
           <h3 class="text__heading">
-            Направления подготовки
+            Структура
           </h3>
           <?php echo get_field('areas') ?>
 
@@ -69,7 +69,24 @@ the_post();
           </h3>
           <div class="generic-content">
             <div class="wide-list">
-              <?php echo get_field('employers_coop') ?>
+              <ul>
+                <?php 
+                  $coop = get_field('employers_coop');
+                  foreach ($coop as $employerId) {
+                    echo '<li><a class="link" href="' . get_permalink($employerId) . '">' . get_the_title($employerId) . '</a></li>';
+                  }
+                ?>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="text text--text text--wide-list">
+          <h3 class="text__heading">
+            Дополнительная информация о работодателях
+          </h3>
+          <div class="generic-content">
+            <div class="wide-list">
+              <?php echo get_field('employers_extra') ?>
             </div>
           </div>
         </section>
@@ -83,6 +100,19 @@ the_post();
             </div>
           </div>
         </section>
+
+        <?php if ( get_field('edu_indicators') ) { ?>
+          <section class="text text--text text--wide-list">
+            <h3 class="text__heading">
+              Показатели системы образования
+            </h3>
+            <div class="generic-content">
+              <div class="wide-list">
+                <?php echo get_field('edu_indicators') ?>
+              </div>
+            </div>
+          </section>
+        <?php } ?>
         <hr>
 
         <section class="text text--text">
@@ -92,7 +122,7 @@ the_post();
           <div class="table__wrapper">
             <table class="table" cellspacing="0">
               <tr>
-                <td class="table__heading">Ректор</td>
+                <td class="table__heading">Руководитель</td>
                 <td class="table__data">Федоров Олег Анатольевич</td>
               </tr>
               <tr>
