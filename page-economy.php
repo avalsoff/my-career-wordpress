@@ -16,11 +16,6 @@ get_header();
 the_post();
 ?>
 
-<pre>
-  <?php
-  ?>
-</pre>
-
 <main class="economy-page">
   <div class="container">
     <?php 

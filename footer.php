@@ -79,7 +79,7 @@
 		<div class="container">
 			<div class="justify-content-between">
 				<p class="footer__text">
-					Сайт разработан в веб агенстве <a href="#" class="link link--small">«На Волне»</a>
+					Сайт разработан в веб агенстве <a href="https://upwave.ru" class="link link--small">«На Волне»</a>
 				</p>
 				<p class="footer__text">
 					© Агентство по труду и занятости населения Сахалинской области, 2018

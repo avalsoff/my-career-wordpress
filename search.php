@@ -45,8 +45,8 @@ get_header();
       'type' => 'array'
     ]);
 
-		echo '<ul class="pagination">';
 		if ($pagination) {
+			echo '<ul class="pagination">';
 			foreach ($pagination as $link) {
 				echo '<li class="pagination__item">';
 				echo $link;

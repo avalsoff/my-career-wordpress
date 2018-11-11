@@ -73,8 +73,8 @@ get_header('index');
 					<div class="col-md-6">
 						<h2 class="heading heading--section">определи свой профессиональный профиль</h2>
 					</div>
-					<div class="col-md-6">
-						<a href="#" class="link link--icon link--icon--list">Сайт опросов кадрового обеспечения Сахалинской
+					<div class="offset-md-1 col-md-5">
+						<a href="http://sakh.upwave.ru" class="link link--icon link--icon--list">Сайт опросов кадрового обеспечения Сахалинской
 							области</a>
 					</div>
 				</div>
