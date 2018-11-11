@@ -143,6 +143,15 @@ the_post();
           }        
         }
       ?>
+      <section class="text profs-item-page__list">
+        <h2 class="text__heading">Профессионально важные качества для работы</h2>
+        <div class="generic-content">
+          <div class="profs-list p0 mb0" style="">
+            <?php echo get_field('important_qualities') ?>
+          </div>
+        </div>
+      </section>
+
       <section class="text text--with-bg text--wide-list profs-item-page__list ">
         <?php 
           if ($viewModel) {
