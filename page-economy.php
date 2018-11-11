@@ -77,15 +77,21 @@ the_post();
               <th colspan="2">Образование</th>
             </tr>
             <tr>
-              <td class="chart-info__key">Вузов:</td>
+              <td class="chart-info__key">ВО:</td>
               <td class="chart-info__value">
                 <?php echo get_field('main_education')['universities_number'] ?>
               </td>
             </tr>
             <tr>
-              <td class="chart-info__key">Колледжей:</td>
+              <td class="chart-info__key">СПО:</td>
               <td class="chart-info__value">
                 <?php echo get_field('main_education')['collegues_number'] ?>
+              </td>
+            </tr>
+            <tr>
+              <td class="chart-info__key">ОО:</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_education')['oo_number'] ?>
               </td>
             </tr>
           </table>
@@ -93,18 +99,24 @@ the_post();
           <table class="chart-info">
             <tr>
               <th>Работодатели</th>
+            </tr>           
+            <tr>
+              <td class="chart-info__key">Организации:</td>
+              <td class="chart-info__value">
+                <?php echo get_field('main_enterprises_number')[0] ?>
+              </td>
             </tr>
             <tr>
+              <td class="chart-info__key">ИП:</td>
               <td class="chart-info__value">
-                <?php echo get_field('main_enterprises_number') ?>
+                <?php echo get_field('main_enterprises_number')[1] ?>
               </td>
-              <td class="chart-info__key">предприятий</td>
             </tr>
           </table>
 
           <table class="chart-info">
             <tr>
-              <th>Прирост (убыль) населения</th>
+              <th>Естественный прирост</th>
             </tr>
 
             <?php 
@@ -127,18 +139,21 @@ the_post();
 
           <table class="chart-info">
             <tr>
-              <th colspan="2">Региональная миграция населения</th>
+              <th>Межрегиональная миграция населения</th>
             </tr>
 
             <?php 
-              $regMigration = get_field('main_reg_migration');
-              foreach ($regMigration as $row) : ?>
+              $regionGrowth = get_field('main_reg_migration');
+              foreach ($regionGrowth as $row) : ?>
             <tr>
               <td class="chart-info__key">
                 <?php echo $row[0] ?>:
               </td>
               <td class="chart-info__value">
-                <?php echo $row[1] ?>
+                <?php echo $row[1][0] ?>
+                <span class="chart-info__arrow-<?php echo $row[1][1] == 'up' ? 'up' : 'down' ?>">
+                  <?php echo $row[1][1] == 'up' ? '↗' : '↘' ?>
+                </span>
               </td>
             </tr>
             <?php endforeach; ?>
@@ -146,18 +161,21 @@ the_post();
 
           <table class="chart-info">
             <tr>
-              <th colspan="2">Зарубежная миграция населения</th>
+              <th>Зарубежная миграция населения</th>
             </tr>
 
             <?php 
-              $migration = get_field('main_migration');
-              foreach ($migration as $row) : ?>
+              $mainMigration = get_field('main_migration');
+              foreach ($mainMigration as $row) : ?>
             <tr>
               <td class="chart-info__key">
                 <?php echo $row[0] ?>:
               </td>
               <td class="chart-info__value">
-                <?php echo $row[1] ?>
+                <?php echo $row[1][0] ?>
+                <span class="chart-info__arrow-<?php echo $row[1][1] == 'up' ? 'up' : 'down' ?>">
+                  <?php echo $row[1][1] == 'up' ? '↗' : '↘' ?>
+                </span>
               </td>
             </tr>
             <?php endforeach; ?>
@@ -181,25 +199,6 @@ the_post();
                 <?php echo get_field('main_area') ?> тыс. км<sup>2</sup>
               </td>
             </tr>
-          </table>
-
-          <table class="chart-info">
-            <tr>
-              <th>Национальная структура населения</th>
-            </tr>
-
-            <?php 
-              $populationStructure = get_field('main_population_structure');
-              foreach ($populationStructure as $row) : ?>
-            <tr>
-              <td class="chart-info__key">
-                <?php echo $row[0] ?>:
-              </td>
-              <td class="chart-info__value">
-                <?php echo $row[1] ?>
-              </td>
-            </tr>
-            <?php endforeach; ?>
           </table>
 
           <table class="chart-info">
@@ -242,11 +241,49 @@ the_post();
 
           <table class="chart-info">
             <tr>
-              <th colspan="2">Количество выпускников</th>
+              <th colspan="2">Количество выпускников ОО</th>
             </tr>
 
             <?php 
               $graduateNumber = get_field('main_graduate_count');
+              foreach ($graduateNumber as $row) : ?>
+            <tr>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </table>
+
+          <table class="chart-info">
+            <tr>
+              <th colspan="2">Количество выпускников СПО</th>
+            </tr>
+
+            <?php 
+              $graduateNumberHe = get_field('main_graduate_count_he');
+              foreach ($graduateNumber as $row) : ?>
+            <tr>
+              <td class="chart-info__key">
+                <?php echo $row[0] ?>:
+              </td>
+              <td class="chart-info__value">
+                <?php echo $row[1] ?>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </table>
+
+          <table class="chart-info">
+            <tr>
+              <th colspan="2">Количество выпускников ВО</th>
+            </tr>
+
+            <?php 
+              $graduateNumberCe = get_field('main_graduate_count_ce');
               foreach ($graduateNumber as $row) : ?>
             <tr>
               <td class="chart-info__key">
@@ -316,8 +353,7 @@ the_post();
           <a class="js-chartgroup-tab9 chart-group__link js-chartgroup-tab-button link">уровень безработицы</a>
           <a class="js-chartgroup-tab10 chart-group__link js-chartgroup-tab-button link">число предприятий и
             организаций</a>
-          <a class="js-chartgroup-tab11 chart-group__link js-chartgroup-tab-button link">численность экономически
-            активного населения</a>
+          <a class="js-chartgroup-tab11 chart-group__link js-chartgroup-tab-button link">численность рабочей силы в возрасте от 15 лет и старше</a>
         </div>
         <div class="chart-group__tabs">
           <?php
@@ -329,13 +365,20 @@ the_post();
             )
           );
           $chartOptions = [
-            'type' => 'column',
+            'type' => null,
             'categories' => $economyIndicators[0],
             'data' => null
           ];
+
+          $pieChartIds = [4, 5, 7, 8, 10];
           $arrLength = count($economyIndicators);
-          for ($i = 1; $i < $arrLength; $i = $i + 1) {
+          for ($i = 1; $i < $arrLength; ++$i) {
             $chartOptions['data'] = $economyIndicators[$i];
+            if ( in_array($i, $pieChartIds) ) {
+              $chartOptions['type'] = 'pie';
+            } else {
+              $chartOptions['type'] = 'column';
+            }
             $active = $i == 1 ? 'active' : '';
             echo '<div class="js-chartgroup-tab' . $i . ' js-chart chart-group__tab ' . $active . '" data-chart=' . json_encode($chartOptions, JSON_NUMERIC_CHECK) . '></div>';
           }
@@ -567,28 +610,58 @@ the_post();
                           <?php echo get_field('mun_density') ?>
                         </td>
                       </tr>
+                      <tr>
+                        <td class="table__heading">Число субъектов хоз. деятельности:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_biz_enitities') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Численность работников организаций:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_org_employers_num') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Среднесписочная численность работников:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_lst_avg_empl_num') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Среднемесячная заработная плата:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_avg_mnth_slry') ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="table__heading">Миграционный прирост/убыль:</td>
+                        <td class="table__data">
+                          <?php echo get_field('mun_mig_grw_lss') ?>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <?php echo get_field('mun_bottom_text') ?>
 
-                  <hr class="hr economy-page__hr">
+                  <!-- <hr class="hr economy-page__hr"> -->
 
                   <?php 
-                  $munIndicators = get_field('mun_graphs');
-                  $munIndicators = array_filter($munIndicators, function($el) {
-                    return $el !== NULL;
-                  });
+                  // $munIndicators = get_field('mun_graphs');
+                  // $munIndicators = array_filter($munIndicators, function($el) {
+                  //   return $el !== NULL;
+                  // });
 
-                  foreach ($munIndicators as $key => $indicator) {
-                    $munIndicators[$key] = array_reverse(
-                      call_user_func_array(
-                        'array_map',
-                        array(-1 => null) + array_map('array_reverse', $indicator)
-                      )
-                    );
-                  }
+                  // foreach ($munIndicators as $key => $indicator) {
+                  //   $munIndicators[$key] = array_reverse(
+                  //     call_user_func_array(
+                  //       'array_map',
+                  //       array(-1 => null) + array_map('array_reverse', $indicator)
+                  //     )
+                  //   );
+                  // }
                   ?>
-                  <div class="chart-group">
+                  <!-- <div class="chart-group">
                     <div class="chart-group__links">
                       <a class="js-chartgroup-tab1 chart-group__link js-chartgroup-tab-button link active">распределение
                         населения по возрастным группам</a>
@@ -601,23 +674,23 @@ the_post();
                     </div>
                     <div class="chart-group__tabs">
                       <?php              
-                      $munChartOptions = [
-                        'type' => 'column',
-                        'categories' => null,
-                        'data' => null
-                      ];
+                      // $munChartOptions = [
+                      //   'type' => 'column',
+                      //   'categories' => null,
+                      //   'data' => null
+                      // ];
 
-                      $j = 1;
-                      foreach ($munIndicators as $indicator) {
-                        $munChartOptions['categories'] = $indicator[0];
-                        $munChartOptions['data'] = $indicator[1];
-                        $active = $j == 1 ? 'active' : '';
-                        echo '<div class="js-chartgroup-tab' . $j . ' js-chart chart-group__tab ' . $active . '" data-chart=\'' . json_encode($munChartOptions, JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK) . '\'></div>';
-                        $j++;
-                      }
+                      // $j = 1;
+                      // foreach ($munIndicators as $indicator) {
+                      //   $munChartOptions['categories'] = $indicator[0];
+                      //   $munChartOptions['data'] = $indicator[1];
+                      //   $active = $j == 1 ? 'active' : '';
+                      //   echo '<div class="js-chartgroup-tab' . $j . ' js-chart chart-group__tab ' . $active . '" data-chart=\'' . json_encode($munChartOptions, JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK) . '\'></div>';
+                      //   $j++;
+                      // }
                     ?>
                     </div>
-                  </div>
+                  </div> -->
                 </section>
               </div>
         <?php 
