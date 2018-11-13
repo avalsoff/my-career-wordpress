@@ -9,6 +9,13 @@
 
 ?>
 
+	<?php
+		$menuLocations = get_nav_menu_locations();
+		$menuID = $menuLocations['footerMenu'];
+		$menuItems = wp_get_nav_menu_items($menuID);
+		$menuItemLen = count($menuItems);
+	?>
+
 <footer class="footer">
 	<div class="footer__main">
 		<div class="container">
@@ -22,54 +29,19 @@
 							</p>
 						</div>
 					</div>
-					<div class="col-md-3">
-						<ul class="footer__links">
-							<li class="footer__item">
-								<a href="#" class="footer__link">Экономика и рынок труда</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Барометр занятости</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Профориентация</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Профессии</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<ul class="footer__links">
-							<li class="footer__item">
-								<a href="#" class="footer__link">Образование</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Работодатели</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Полезные материалы</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Новости</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-3">
-						<ul class="footer__links">
-							<li class="footer__item">
-								<a href="#" class="footer__link">О проекте</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Контакты</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Карта сайта</a>
-							</li>
-							<li class="footer__item">
-								<a href="#" class="footer__link">Сайт опросов</a>
-							</li>
-						</ul>
-					</div>
+					<?php for ($i = 0; $i < $menuItemLen; $i += $menuItemLen / 3): ?>					
+						<div class="col-md-3">
+							<ul class="footer__links">
+								<?php for ($j = $i; $j < $menuItemLen / 3 + $i; ++$j): ?>
+									<li class="footer__item">
+										<a href="<?php echo $menuItems[$j]->url ?>" class="footer__link">
+											<?php echo $menuItems[$j]->title ?>
+										</a>
+									</li>
+								<?php endfor; ?>
+							</ul>
+						</div>
+					<?php	endfor; ?>
 				</div>
 			</div>
 		</div>

@@ -126,8 +126,8 @@ the_post();
           $viewModel = [];
           foreach ($allTerms as $term) {
             $viewModel[$term->slug] = [
-              'id' => $term->term_id,
-              'name' => $term->name,
+              'id'    => $term->term_id,
+              'name'  => $term->name,
               'posts' => []
             ];
           }
@@ -174,11 +174,26 @@ the_post();
       <section class="text profs-item-page__list">
         <h2 class="text__heading">Ведущие работодатели</h2>
         <div class="generic-content">
-          <div class="profs-list p0">
-            <?php echo get_field('leading_empl') ?>
+          <div class="profs-list p0 mb0">
+            <ul>
+              <?php foreach ( get_field('leading_empl') as $itemID ) : ?>
+                <li><a href="<?php echo get_the_permalink($itemID) ?>"><?php echo get_the_title($itemID) ?></a></li>
+              <?php endforeach; ?>
+            </ul>
           </div>
         </div>
       </section>
+
+      <?php if ( get_field('empl_extra') ): ?>
+        <section class="text profs-item-page__list">
+          <h2 class="text__heading">Дополнительная информация о работодателях</h2>
+          <div class="generic-content">
+            <div class="profs-list p0">
+              <?php echo get_field('empl_extra') ?>
+            </div>
+          </div>
+        </section>
+      <?php endif; ?>
     </div>
 
   </div>

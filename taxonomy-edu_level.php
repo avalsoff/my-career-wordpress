@@ -63,17 +63,16 @@ get_header();
       $pagination = paginate_links([
         'type' => 'array'
       ]);
-
-      if ($pagination) {
-        echo '<ul class="pagination">';
-        foreach ($pagination as $link) {
-          echo '<li class="pagination__item">';
-          echo $link;
-          echo '</li>';
-        }
-        echo '</ul>';
-      }
     ?>
+    <?php if ($pagination) : ?>
+      <ul class="pagination">
+      <?php foreach ($pagination as $link) : ?>
+        <li class="pagination__item">
+          <?php echo $link ?>
+        </li>
+      <?php endforeach; ?>
+      </ul>
+    <?php endif; ?>
 
   </div>
 </main>

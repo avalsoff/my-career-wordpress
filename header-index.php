@@ -32,9 +32,13 @@
 				<div class="row justify-content-between align-items-center">
 					<div class="col-lg-5">
 						<a href="<?php echo site_url() ?>" class="logo">
-							<div class="logo__image-wrapper">
-								<img src="<?php bloginfo('template_url'); ?>/images/logo.png" alt="" class="logo__image">
-							</div>
+              <div class="logo__image-wrapper">     
+                <?php 
+                  $custom_logo_id = get_theme_mod( 'custom_logo' );
+                  $image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+                ?>
+                <img src="<?php echo $image[0]; ?>" alt="" class="logo__image">
+              </div>
 							<div class="logo__caption-wrapper">
 								<b class="logo__heading">Моя карьера</b>
 								<p class="logo__caption">Портал профориентации населения Сахалинской области</p>

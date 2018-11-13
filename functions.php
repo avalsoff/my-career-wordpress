@@ -193,3 +193,14 @@ function my_career_adjust_queries($query) {
 }
 
 add_action('pre_get_posts', 'my_career_adjust_queries');
+
+function my_template_select() {
+	if (is_category() && !is_feed()) {
+			if (is_category(get_cat_id('useful-materials')) || cat_is_ancestor_of(get_cat_id('useful-materials'), get_query_var('cat'))) {
+					load_template(TEMPLATEPATH . '/category-useful-materials.php');
+					exit;
+			}
+	}
+}
+
+add_action('template_redirect', 'my_template_select');
