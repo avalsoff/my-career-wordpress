@@ -27,27 +27,31 @@ the_post();
       ])
     ?>
 
-    <div class="edu-item-page__logo logo-image logo-image--medium">
-      <img src="<?php echo get_field('new_image')['url'] ?>" class="logo-image__image">
-    </div>
+    <?php if ( get_field('new_image') ) { ?>
+      <div class="edu-item-page__logo logo-image logo-image--medium">
+        <img src="<?php echo get_field('new_image')['url'] ?>" class="logo-image__image">
+      </div>
+    <?php } ?>
 
     <h1 class="heading heading--page">Федеральное государственное бюджетное образовательное учреждение высшего
       образования «Сахалинский государственный университет»</h1>
 
     <div class="edu-item-page__container">
-      <section class="edu-item-page__carousel slick--medium">
-        <?php 
-          $images = get_field('edu_images');
-          foreach ($images as $image) { ?>
-            <div class="slide slide--medium">
-              <div class="slide__image-wrapper">
-                <img src="<?php echo $image['image']['url'] ?>" alt="<?php echo $image['image']['alt'] ?>" class="slide__image">
+      <?php if ( get_field('edu_images') ) { ?>
+        <section class="edu-item-page__carousel slick--medium">
+          <?php 
+            $images = get_field('edu_images');
+            foreach ($images as $image) { ?>
+              <div class="slide slide--medium">
+                <div class="slide__image-wrapper">
+                  <img src="<?php echo $image['image']['url'] ?>" alt="<?php echo $image['image']['alt'] ?>" class="slide__image">
+                </div>
               </div>
-            </div>
-        <?php
-          }
-        ?>
-      </section>
+          <?php
+            }
+          ?>
+        </section>
+      <?php } ?>
 
       <article class="edu-item-page__info">
         <section class="text text--text">
@@ -63,23 +67,27 @@ the_post();
           <?php echo get_field('areas') ?>
 
         </section>
-        <section class="text text--text text--with-bg text--wide-list">
-          <h3 class="text__heading">
-            Сотрудничество с работодателями
-          </h3>
-          <div class="generic-content">
-            <div class="wide-list">
-              <ul>
-                <?php 
-                  $coop = get_field('employers_coop');
-                  foreach ($coop as $employerId) {
-                    echo '<li><a class="link" href="' . get_permalink($employerId) . '">' . get_the_title($employerId) . '</a></li>';
-                  }
-                ?>
-              </ul>
+
+        <?php if ( $coop = get_field('employers_coop') ) { ?>
+          <section class="text text--text text--with-bg text--wide-list">
+            <h3 class="text__heading">
+              Сотрудничество с работодателями
+            </h3>
+            <div class="generic-content">
+              <div class="wide-list">
+                <ul>
+                  <?php 
+                    $coop = get_field('employers_coop');
+                    foreach ($coop as $employerId) {
+                      echo '<li><a class="link" href="' . get_permalink($employerId) . '">' . get_the_title($employerId) . '</a></li>';
+                    }
+                  ?>
+                </ul>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        <?php } ?>
+        
         <section class="text text--text text--wide-list">
           <h3 class="text__heading">
             Дополнительная информация о работодателях
@@ -101,19 +109,32 @@ the_post();
           </div>
         </section>
 
-        <?php if ( get_field('edu_indicators') ) { ?>
-          <section class="text text--text text--wide-list">
+        <?php if ( get_field('edu_indicators') ) { ?>          
+          <section class="text text--text">
             <h3 class="text__heading">
               Показатели системы образования
             </h3>
             <div class="generic-content">
-              <div class="wide-list">
+              <div class="profs-list">
                 <?php echo get_field('edu_indicators') ?>
+              </div>
+            </div>
+            
+          </section>
+        <?php } ?>        
+
+        <?php if ( get_field('edu_prof_list') ) { ?>          
+          <section class="text text--text">
+            <h3 class="text__heading">
+              Перечень профессий / специальностей
+            </h3>            
+            <div class="generic-content">
+              <div class="wide-list">
+                <?php echo get_field('edu_prof_list') ?>
               </div>
             </div>
           </section>
         <?php } ?>
-        <hr>
 
         <section class="text text--text">
           <h3 class="text__heading">
