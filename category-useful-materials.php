@@ -31,12 +31,8 @@
 
     <?php 
       $terms = get_categories([
-        'child_of'      => get_cat_ID('useful-materials'),
+        'child_of'      => get_category_by_slug('useful-materials')->cat_ID,
       ]);
-
-      $terms = array_filter($terms, function($el) {
-        return $el->slug !== 'useful-materials';
-      });
     ?>
 
     <ul class="tabs">

@@ -204,3 +204,35 @@ function my_template_select() {
 }
 
 add_action('template_redirect', 'my_template_select');
+
+
+function get_html_sitemap( $atts ){
+
+	$result = '';
+	$args = ['public' => 1];
+
+	$ignoreposttypes = ['attachment', 'post', 'municipality', 'announcement'];
+
+	$post_types = get_post_types( $args, 'objects' ); 
+
+	foreach ($post_types as $post_type) {
+			if( !in_array($post_type->name, $ignoreposttypes) ) {
+					$result .= '<h2>' . $post_type->labels->name . '</h2>';
+					$args = [
+							'posts_per_page'   => -1,
+							'post_type'        => $post_type->name,
+							'post_status'      => 'publish'
+					];
+					$posts_array = get_posts($args); 
+					$result .=  '<ul>';
+					foreach ($posts_array as $pst) {
+							$result .=  '<li><a href="' . get_permalink($pst->ID) . '">' . $pst->post_title . '</a></li>';
+					}
+					$result .=  '</ul>';
+			}
+	}
+
+	return $result;
+}
+
+add_shortcode('htmlsitemap', 'get_html_sitemap');

@@ -260,7 +260,7 @@ the_post();
 
             <?php 
               $graduateNumberHe = get_field('main_graduate_count_he');
-              foreach ($graduateNumber as $row) : ?>
+              foreach ($graduateNumberHe as $row) : ?>
             <tr>
               <td class="chart-info__key">
                 <?php echo $row[0] ?>:
@@ -279,7 +279,7 @@ the_post();
 
             <?php 
               $graduateNumberCe = get_field('main_graduate_count_ce');
-              foreach ($graduateNumber as $row) : ?>
+              foreach ($graduateNumberCe as $row) : ?>
             <tr>
               <td class="chart-info__key">
                 <?php echo $row[0] ?>:
@@ -339,7 +339,7 @@ the_post();
           <a class="js-chartgroup-tab4 chart-group__link js-chartgroup-tab-button link">отраслевая структура ВДС</a>
           <a class="js-chartgroup-tab5 chart-group__link js-chartgroup-tab-button link">распределение СЧЗ по ВЭД</a>
           <a class="js-chartgroup-tab6 chart-group__link js-chartgroup-tab-button link">среднемесячная номинальная
-            начисленная заработная плата рабоников</a>
+            начисленная заработная плата работников</a>
           <a class="js-chartgroup-tab7 chart-group__link js-chartgroup-tab-button link">структура занятых по
             возрастным
             группам</a>
@@ -352,32 +352,55 @@ the_post();
         </div>
         <div class="chart-group__tabs">
           <?php
-          // Rotate 2d array of economy indicators counterclock-wise and reverse it
-          $economyIndicators = array_reverse(
-            call_user_func_array(
-              'array_map',
-              array(-1 => null) + array_map('array_reverse', get_field('economy_indicators') )
-            )
-          );
-          $chartOptions = [
-            'type' => null,
-            'categories' => $economyIndicators[0],
-            'data' => null
-          ];
+            $economyIndicators = get_field('ind_graphs');
+            $economyIndicators = array_filter($economyIndicators, function($el) {
+              return $el !== NULL;
+            });
 
-          $pieChartIds = [4, 5, 7, 8, 10];
-          $arrLength = count($economyIndicators);
-          for ($i = 1; $i < $arrLength; ++$i) {
-            $chartOptions['data'] = $economyIndicators[$i];
-            if ( in_array($i, $pieChartIds) ) {
-              $chartOptions['type'] = 'pie';
-            } else {
-              $chartOptions['type'] = 'column';
+            foreach ($economyIndicators as $key => $indicator) {
+              if ($indicator['entries']) {
+                $economyIndicators[$key]['entries'] = array_reverse(
+                  call_user_func_array(
+                    'array_map',
+                    array(-1 => null) + array_map('array_reverse', $indicator['entries'])
+                  )
+                );
+              }
             }
-            $active = $i == 1 ? 'active' : '';
-            echo '<div class="js-chartgroup-tab' . $i . ' js-chart chart-group__tab ' . $active . '" data-chart=' . json_encode($chartOptions, JSON_NUMERIC_CHECK) . '></div>';
-          }
-        ?>
+
+            $chartOptions = [
+              'type' => null,
+              'categories' => null,
+              'data' => null
+            ];
+
+            $j = 1;
+            foreach ($economyIndicators as $k => $indicator) {            
+              $chartOptions['data'] = [];
+              $type = $chartOptions['type'] = $indicator['type'];
+              if ($type == 'pie') {
+                if ( is_array( $indicator['entries'][1] ) ) {
+                  foreach ($indicator['entries'][1] as $key => $value) {
+                    $chartOptions['data'][] = [
+                      'name' => $indicator['entries'][0][$key],
+                      'y' => $value
+                    ];
+                  }
+                } else {
+                  $chartOptions['data'][] = [
+                    'name' => $indicator['entries'][0],
+                    'y' => $indicator['entries'][1]
+                  ];
+                }     
+              } else {
+                $chartOptions['data'] = $indicator['entries'][1];
+              }
+              $chartOptions['categories'] = $indicator['entries'][0];
+              $active = $j == 1 ? 'active' : '';
+              echo '<div class="js-chartgroup-tab' . $j . ' js-chart chart-group__tab ' . $active . '" data-chart=\'' . json_encode($chartOptions, JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK) . '\'></div>';
+              $j++;
+            }
+          ?>
         </div>
       </div>
     </section>
