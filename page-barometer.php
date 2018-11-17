@@ -80,7 +80,7 @@ get_header();
         16 => 'Холмский городской округ',
         17 => 'Южно-Курильский городской округ',
         18 => 'Сахалинская область'
-      ]    
+      ];
     ?>
 
     <ul class="tabs">
@@ -91,6 +91,22 @@ get_header();
         <a class="button<?php echo $byProfs ? ' button--active' : '" href="?prof=' . array_keys($groupByProfs)[0] ?>">По профессии</a>
       </li>
     </ul>
+    
+    <?php 
+      function printItem($item, $byProfs, $idToMun) {
+
+        if ($byProfs) {
+          echo $idToMun[$item];
+        } else {
+          if ( get_post_field('post_content', $item) ) {
+            $atts .= 'class="link link--tel" href="' . get_permalink($item) . '"';
+            echo '<a ' . $atts . '>' . get_the_title($item) . '</a>';
+          } else {
+            echo get_the_title($item);
+          }
+        }
+      }
+    ?>
 
     <div class="barometr-page__wrapper row">
       <article class="col-xl-9 col-lg-8">
@@ -104,7 +120,7 @@ get_header();
               <?php foreach ($viewModel[0] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
-                  echo $byProfs ? $idToMun[$item] : get_the_title($item) 
+                  printItem($item, $byProfs, $idToMun)
                 ?>
               </li>
               <?php endforeach; ?>
@@ -122,7 +138,7 @@ get_header();
               <?php foreach ($viewModel[1] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
-                  echo $byProfs ? $idToMun[$item] : get_the_title($item) 
+                  printItem($item, $byProfs, $idToMun)
                 ?>
               </li>
               <?php endforeach; ?>
@@ -140,7 +156,7 @@ get_header();
               <?php foreach ($viewModel[2] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
-                  echo $byProfs ? $idToMun[$item] : get_the_title($item) 
+                  printItem($item, $byProfs, $idToMun)
                 ?>
               </li>
               <?php endforeach; ?>
@@ -163,11 +179,10 @@ get_header();
           <?php endforeach; ?>
         </ul>
         <?php } else {  ?>
-        <h2 class="barometr-page__aside-heading">Поиск по професии</h2>
+        <h2 class="barometr-page__aside-heading">Выбор професcии</h2>
         <form class="search search-page__search">
-          <button type="submit" class="search__icon"></button>
           <!-- <input class="search__input" type="search" placeholder="Найти..." name="prof"> -->
-          <select class="search__input" name="prof">
+          <select class="search__input search__input--select" name="prof" onchange="this.form.submit()">
             <?php 
             $allProfessions = new WP_Query([
               'posts_per_page' => -1,
@@ -179,7 +194,8 @@ get_header();
             if ( $allProfessions->have_posts() ) {
               while ( $allProfessions->have_posts() ) {
                 $allProfessions->the_post();
-                echo '<option value="' . get_the_ID() . '">' . get_the_title() . '</option>';
+                $selected = $profVar == get_the_ID() ? 'selected' : '';
+                echo '<option '. $selected . ' value="' . get_the_ID() . '">' . get_the_title() . '</option>';
               }
             }          
             wp_reset_postdata();

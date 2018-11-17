@@ -94,7 +94,7 @@ the_post();
           <table class="chart-info">
             <tr>
               <th>Работодатели</th>
-            </tr>           
+            </tr>
             <tr>
               <td class="chart-info__key">Организации:</td>
               <td class="chart-info__value">
@@ -348,7 +348,8 @@ the_post();
           <a class="js-chartgroup-tab9 chart-group__link js-chartgroup-tab-button link">уровень безработицы</a>
           <a class="js-chartgroup-tab10 chart-group__link js-chartgroup-tab-button link">число предприятий и
             организаций</a>
-          <a class="js-chartgroup-tab11 chart-group__link js-chartgroup-tab-button link">численность рабочей силы в возрасте от 15 лет и старше</a>
+          <a class="js-chartgroup-tab11 chart-group__link js-chartgroup-tab-button link">численность рабочей силы в
+            возрасте от 15 лет и старше</a>
         </div>
         <div class="chart-group__tabs">
           <?php
@@ -588,83 +589,83 @@ the_post();
               $tabId = $munsPostIdToTabId[get_the_ID()];              
               $active = $tabId == 1 ? 'active' : '';
         ?>
-              <div class="js-map-tab<?php echo $tabId ?> economy-page__region-tab <?php echo $active ?> js-tab">
-                <section class="text text--text">
-                  <h3 class="text__heading">
-                    <?php the_title() ?>
-                  </h3>
-                  <?php the_content() ?>
-                  <div class="table__wrapper economy-page__region-table">
-                    <table class="table" cellspacing="0">
-                      <tr>
-                        <td class="table__heading">Административный центр:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_center') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Официальный сайт:</td>
-                        <td class="table__data">
-                          <a class="link" href="<?php echo get_field('mun_site') ?>">
-                            <?php echo get_field('mun_site') ?>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Численность населения:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_population') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Площадь территории:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_area') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Плотность населения:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_density') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Число субъектов хоз. деятельности:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_biz_enitities') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Численность работников организаций:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_org_employers_num') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Среднесписочная численность работников:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_lst_avg_empl_num') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Среднемесячная заработная плата:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_avg_mnth_slry') ?>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="table__heading">Миграционный прирост/убыль:</td>
-                        <td class="table__data">
-                          <?php echo get_field('mun_mig_grw_lss') ?>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <?php echo get_field('mun_bottom_text') ?>
+        <div class="js-map-tab<?php echo $tabId ?> economy-page__region-tab <?php echo $active ?> js-tab">
+          <section class="text text--text">
+            <h3 class="text__heading">
+              <?php the_title() ?>
+            </h3>
+            <?php the_content() ?>
+            <div class="table__wrapper economy-page__region-table">
+              <table class="table" cellspacing="0">
+                <tr>
+                  <td class="table__heading">Административный центр:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_center') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Официальный сайт:</td>
+                  <td class="table__data">
+                    <a class="link" href="<?php echo get_field('mun_site') ?>">
+                      <?php echo get_field('mun_site') ?>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Численность населения:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_population') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Площадь территории:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_area') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Плотность населения:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_density') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Число субъектов хоз. деятельности:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_biz_enitities') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Численность работников организаций:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_org_employers_num') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Среднесписочная численность работников:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_lst_avg_empl_num') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Среднемесячная заработная плата:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_avg_mnth_slry') ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table__heading">Миграционный прирост/убыль:</td>
+                  <td class="table__data">
+                    <?php echo get_field('mun_mig_grw_lss') ?>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <?php echo get_field('mun_bottom_text') ?>
 
-                  <!-- <hr class="hr economy-page__hr"> -->
+            <!-- <hr class="hr economy-page__hr"> -->
 
-                  <?php 
+            <?php 
                   // $munIndicators = get_field('mun_graphs');
                   // $munIndicators = array_filter($munIndicators, function($el) {
                   //   return $el !== NULL;
@@ -679,7 +680,7 @@ the_post();
                   //   );
                   // }
                   ?>
-                  <!-- <div class="chart-group">
+            <!-- <div class="chart-group">
                     <div class="chart-group__links">
                       <a class="js-chartgroup-tab1 chart-group__link js-chartgroup-tab-button link active">распределение
                         населения по возрастным группам</a>
@@ -709,8 +710,8 @@ the_post();
                     ?>
                     </div>
                   </div> -->
-                </section>
-              </div>
+          </section>
+        </div>
         <?php 
             }
           }
@@ -725,4 +726,13 @@ the_post();
 </main>
 
 <?php
-get_footer('economy');
+  get_footer('custom');
+?>
+
+<script>
+  economyPage();
+</script>
+
+</body>
+
+</html>
