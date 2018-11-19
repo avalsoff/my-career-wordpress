@@ -28,10 +28,11 @@ the_post();
           ],
         ])
       ?>
-
-      <div class="employers-item-page__logo logo-image logo-image--square logo-image--medium">
-        <img src="<?php echo get_field('new_image')['url'] ?>" class="logo-image__image">
-      </div>
+	  <?php if ( get_field('new_image') ) { ?>
+		  <div class="employers-item-page__logo logo-image logo-image--square logo-image--medium">
+			<img src="<?php echo get_field('new_image')['url'] ?>" class="logo-image__image">
+		  </div>
+      <?php } ?>		
 
       <h1 class="heading heading--page">
         <?php the_title() ?>

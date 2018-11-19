@@ -24,17 +24,17 @@ the_post();
   </pre> -->
   <div class="container test-page__container">
     <?php 
-				pageBreadcrumbps([
-					[
-						'href'  => '/',
-						'title' => 'главная'
-          ],
-          [
-            'профориентация' => '/vocational-guidance',
-            'title'          => 'профориентация'
-          ]
-				]); 
-			?>
+      pageBreadcrumbps([
+        [
+          'href'  => '/',
+          'title' => 'Главная' 
+        ],
+        [
+          'href'  => '/career-guidance',
+          'title' => 'Профориентация' 
+        ],
+      ]) 
+    ?>
 
     <h1 class="heading heading--page">
       <?php the_title() ?>
@@ -42,21 +42,7 @@ the_post();
 
     <div class="test">
       <div class="test__description">
-        <h2>Личностный опросник Айзенка (подростковый)</h2>
-        <p>
-          Темперамент человека не определяет однозначно успешность профессиональной деятельности.
-        </p>
-        <p>
-          Тем не менее, установлено, что существует соответствие между особенностями личности человека и качеством
-          его
-          работы. Выполнив опросник Айзенка, Вы сможете определить насколько выражены у Вас базовые свойства
-          темперамента и к какому типу темперамента вы относитесь (поскольку чистые типы встречаются крайне редко,
-          скорее всего Вы узнаете, какой тип является преобладающим).
-        </p>
-        <p>
-          По результатам тестирования Вы получите рекомендации, касающиеся того, какие виды профессиональной
-          деятельности Вам подходят, а какие, наоборот, будут вызывать у Вас затруднения.
-        </p>
+        <?php the_content() ?>
         <button class="test__button test__button--start">Пройти тест</button>
       </div>
       <div class="test__questions">
@@ -294,19 +280,21 @@ the_post();
           </div>
         </div>
       </div>
-      <style>
-        .test__res {
-          display: none;
-        }
-      </style>
       <div class="test__result">
-        <?php $results = get_field('test_results')?>
+        <?php $results = get_field('test_results') ?>
+        <div class="test__points">
+          Вы набрали {{res}} баллов по шкале:
+        </div>
         <?php foreach ($results as $resKey => $res): ?>
-          <div class="test__res generic-content" data-key="<?php echo $resKey ?>">
+          <div class="test__res generic-content profs-list" data-key="<?php echo $resKey ?>">
             <?php echo $results[$resKey][0] ?>
             <ul>
               <?php foreach ($results[$resKey][1] as $profID): ?>
-                <li><a href="#"><?php echo get_the_title($profID) ?></a></li>
+                <li>
+					<? if ( get_post_field('post_content', $profID) ) { ?>
+					<a href="<? echo get_permalink($profID); ?>"><?php echo get_the_title($profID); ?></a>
+					<? } else { echo get_the_title($profID); } ?>
+				</li>
               <?php endforeach; ?>
             </ul>
           </div>
@@ -322,113 +310,7 @@ the_post();
 ?>
 
 <script>
-  const elem = {
-    startBtn: $('.test__button--start'),
-    description: $('.test__description'),
-    questionsBlock: $('.test__questions'),
-    questions: $('.test__block'),
-    prevBtn: $('.test__button--prev'),
-    nextBtn: $('.test__button--next'),
-    result: $('.test__result'),
-    topIndex: $('.test__top-index'),
-    bottomIndex: $('.test__bottom-index'),
-    answerBtns: $('.test__answer')
-  }
-  elem.currentQuestion = elem.questions.first();
-
-  const fadeDelay = 150;
-  const maxIndex = elem.questions.length;
-  let currentIndex = 0;
-  const testResult = {};
-  const testHistory = [];
-
-
-  elem.startBtn.click(() => {
-    elem.description.fadeOut(fadeDelay);
-    elem.startBtn.fadeOut(fadeDelay, () => {
-      elem.questionsBlock.fadeIn(fadeDelay);
-      elem.currentQuestion.fadeIn(fadeDelay);
-    });
-    elem.prevBtn.prop('disabled', true);
-    elem.nextBtn.prop('disabled', true);
-    if (currentIndex === maxIndex) {
-      elem.nextBtn.prop('disabled', true);
-    }
-    updateIndexes();
-  });
-
-  elem.nextBtn.click(() => {
-    const checked = elem.currentQuestion.find('.test__input:checked');
-    if (!checked.length) {
-      return;
-    }
-
-    const current = {
-      value: Number(checked.val()),
-      key: checked.data('key')
-    }
-
-    testResult[current.key] = testResult[current.key] ?
-      testResult[current.key] + current.value :
-      current.value;
-
-    testHistory.push(current);
-
-    if (elem.prevBtn.is(':disabled')) {
-      elem.prevBtn.prop('disabled', false)
-    }
-
-    elem.currentQuestion.fadeOut(fadeDelay, function () {
-      elem.currentQuestion = $(this).next();
-      elem.currentQuestion.fadeIn(fadeDelay);
-    });
-    elem.nextBtn.prop('disabled', true);
-
-    ++currentIndex;
-    if (currentIndex === maxIndex) {
-      const [resultKey, ] = Object.entries(testResult).reduce(([maxKey, maxVal], [curKey, curVal]) => {	
-        return curVal >= maxVal ? [curKey, curVal] : [maxKey, maxVal];
-      });
-
-      elem.questionsBlock.fadeOut(fadeDelay, () => {
-        elem.result.fadeIn(fadeDelay);
-        $('.test__res[data-key="' + resultKey + '"]').show();
-      });
-    } else {
-      updateIndexes();
-    }
-  });
-
-  elem.prevBtn.click(() => {
-    if (elem.nextBtn.is(':disabled')) {
-      elem.nextBtn.prop('disabled', false);
-    }
-
-    const {
-      key: lastKey,
-      value: lastValue
-    } = testHistory.pop();
-    testResult[lastKey] -= lastValue;
-
-    elem.currentQuestion.fadeOut(fadeDelay, function () {
-      elem.currentQuestion = $(this).prev();
-      elem.currentQuestion.fadeIn(fadeDelay);
-    });
-    elem.nextBtn.prop('disabled', true);
-    if (--currentIndex === 0) {
-      elem.prevBtn.prop('disabled', true)
-    }
-    updateIndexes();
-  });
-
-  elem.answerBtns.click(() => {
-    elem.nextBtn.prop('disabled', false);
-  });
-
-  function updateIndexes() {
-    elem.topIndex.html(`Вопрос ${currentIndex + 1} из ${maxIndex}`);
-    elem.bottomIndex.html(`${currentIndex + 1} / ${maxIndex}`);
-  }
+  careerTest();
 </script>
 
 </body>

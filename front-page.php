@@ -37,31 +37,31 @@ get_header('index');
 		<section class="index-page__links-group links-group">
 			<ul class="links-group__items">
 				<li class="links-group__item">
-					<a href="#" class="links-group__image logo-image">
+					<a href="/category/useful-materials/for-schoolchildren/" class="links-group__image logo-image">
 						<img src="<?php bloginfo('template_url'); ?>/images/schoolars.jpg" alt="" class="logo-image__image">
 					</a>
-					<a href="#" class="links-group__link link link--title">Школьникам</a>
+					<a href="/category/useful-materials/for-schoolchildren/" class="links-group__link link link--title">Школьникам</a>
 				</li>
 
 				<li class="links-group__item">
-					<a href="#" class="links-group__image logo-image">
+					<a href="/category/useful-materials/for-students/" class="links-group__image logo-image">
 						<img src="<?php bloginfo('template_url'); ?>/images/student.jpg" alt="" class="logo-image__image">
 					</a>
-					<a href="#" class="links-group__link link link--title">Студентам</a>
+					<a href="/category/useful-materials/for-students/" class="links-group__link link link--title">Студентам</a>
 				</li>
 
 				<li class="links-group__item">
-					<a href="#" class="links-group__image logo-image">
+					<a href="/category/useful-materials/for-parents/" class="links-group__image logo-image">
 						<img src="<?php bloginfo('template_url'); ?>/images/parents.jpg" alt="" class="logo-image__image">
 					</a>
-					<a href="#" class="links-group__link link link--title">Родителям</a>
+					<a href="/category/useful-materials/for-parents/" class="links-group__link link link--title">Родителям</a>
 				</li>
 
 				<li class="links-group__item">
-					<a href="#" class="links-group__image logo-image">
+					<a href="/category/useful-materials/for-jobseekers/" class="links-group__image logo-image">
 						<img src="<?php bloginfo('template_url'); ?>/images/employeers.jpg" alt="" class="logo-image__image">
 					</a>
-					<a href="#" class="links-group__link link link--title">Ищущим работу</a>
+					<a href="/category/useful-materials/for-jobseekers/" class="links-group__link link link--title">Ищущим работу</a>
 				</li>
 
 			</ul>
@@ -74,7 +74,8 @@ get_header('index');
 						<h2 class="heading heading--section">определи свой профессиональный профиль</h2>
 					</div>
 					<div class="offset-md-1 col-md-5">
-						<a href="http://sakh.upwave.ru" class="link link--icon link--icon--list">Сайт опросов кадрового обеспечения Сахалинской
+						<a href="http://sakh.upwave.ru" class="link link--icon link--icon--list">Сайт опросов кадрового обеспечения
+							Сахалинской
 							области</a>
 					</div>
 				</div>
@@ -83,31 +84,31 @@ get_header('index');
 			<div class="index-page__links-group links-group">
 				<ul class="links-group__items">
 					<li class="links-group__item">
-						<a href="#" class="links-group__image logo-image">
+						<a href="<?php echo site_url('/test-11-13'); ?>" class="links-group__image logo-image">
 							<img src="<?php bloginfo('template_url'); ?>/images/boy.jpg" alt="" class="logo-image__image">
 						</a>
-						<a href="#" class="links-group__link link link--title">11-13 лет</a>
+						<a href="<?php echo site_url('/test-11-13'); ?>" class="links-group__link link link--title">11-13 лет</a>
 					</li>
 
 					<li class="links-group__item">
-						<a href="#" class="links-group__image logo-image">
+						<a href="<?php echo site_url('/test-14-15'); ?>" class="links-group__image logo-image">
 							<img src="<?php bloginfo('template_url'); ?>/images/girl.jpg" alt="" class="logo-image__image">
 						</a>
-						<a href="#" class="links-group__link link link--title">14-15 лет</a>
+						<a href="<?php echo site_url('/test-14-15'); ?>" class="links-group__link link link--title">14-15 лет</a>
 					</li>
 
 					<li class="links-group__item">
-						<a href="#" class="links-group__image logo-image">
+						<a href="<?php echo site_url('/test-16-17'); ?>" class="links-group__image logo-image">
 							<img src="<?php bloginfo('template_url'); ?>/images/teenage.jpg" alt="" class="logo-image__image">
 						</a>
-						<a href="#" class="links-group__link link link--title">16-17 лет</a>
+						<a href="<?php echo site_url('/test-16-17'); ?>" class="links-group__link link link--title">16-17 лет</a>
 					</li>
 
 					<li class="links-group__item">
-						<a href="#" class="links-group__image logo-image">
+						<a href="<?php echo site_url('/test-18'); ?>" class="links-group__image logo-image">
 							<img src="<?php bloginfo('template_url'); ?>/images/adult.jpg" alt="" class="logo-image__image">
 						</a>
-						<a href="#" class="links-group__link link link--title">18 лет и старше</a>
+						<a href="<?php echo site_url('/test-18'); ?>" class="links-group__link link link--title">18 лет и старше</a>
 					</li>
 
 				</ul>
@@ -125,7 +126,7 @@ get_header('index');
 				</div>
 
 				<div class="text text--list text--with-bg text--left-border generic-content">
-          <?php the_field('interesting_links') ?>
+					<?php the_field('interesting_links') ?>
 				</div>
 
 			</div>

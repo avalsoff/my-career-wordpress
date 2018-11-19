@@ -636,12 +636,6 @@ the_post();
                   </td>
                 </tr>
                 <tr>
-                  <td class="table__heading">Численность работников организаций:</td>
-                  <td class="table__data">
-                    <?php echo get_field('mun_org_employers_num') ?>
-                  </td>
-                </tr>
-                <tr>
                   <td class="table__heading">Среднесписочная численность работников:</td>
                   <td class="table__data">
                     <?php echo get_field('mun_lst_avg_empl_num') ?>

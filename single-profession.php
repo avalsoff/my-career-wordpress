@@ -53,9 +53,11 @@ the_post();
             <?php echo get_field('average_salary'); ?></b>
           <p class="prof-description__caption">тыс. руб.*</p>
         </div>
-        <small class="prof-description__footnote">
-          * — по вакансиям, заявленным в органы службы занятости населения в 2017 году
-        </small>
+		<?php if ( get_field('empl_year') ) { ?>
+			<small class="prof-description__footnote">
+			  * — по вакансиям, заявленным в органы службы занятости населения в <?php echo get_field('empl_year') ?> году
+			</small>
+		<?php } ?>
       </li>
       <li class="prof-description__item col-lg-6">
         <h3 class="heading heading--top-icon">
@@ -93,7 +95,7 @@ the_post();
           </div>
         </div>
       </li>
-      <li class="prof-description__item col-lg-6">
+      <li class="prof-description__item <?php if ( get_field('specializing') ) { echo 'col-lg-6'; } else { echo 'col-lg-12'; } ?>">
         <h3 class="heading heading--top-icon">
           <span class="icon icon--pills"></span>
           Медицинские противопоказания
@@ -104,17 +106,19 @@ the_post();
           </div>
         </div>
       </li>
-      <li class="prof-description__item col-lg-6">
-        <h3 class="heading heading--top-icon">
-          <span class="icon icon--edu"></span>
-          Учебная специальность
-        </h3>
-        <div class="generic-content">
-          <div class="profs-list">
-            <?php echo get_field('specializing') ?>
-          </div>
-        </div>
-      </li>
+	  <?php if ( get_field('specializing') ) { ?>
+		  <li class="prof-description__item col-lg-6">
+			<h3 class="heading heading--top-icon">
+			  <span class="icon icon--edu"></span>
+			  Учебная специальность
+			</h3>
+			<div class="generic-content">
+			  <div class="profs-list">
+				<?php echo get_field('specializing') ?>
+			  </div>
+			</div>
+		  </li>
+		<?php } ?>
     </ul>
     <div class="profs-item-page__container">
       <?php
@@ -143,6 +147,7 @@ the_post();
           }        
         }
       ?>
+
       <section class="text profs-item-page__list">
         <h2 class="text__heading">Профессионально важные качества для работы</h2>
         <div class="generic-content">
@@ -170,20 +175,22 @@ the_post();
           }
         ?>
       </section>
-
-      <section class="text profs-item-page__list">
-        <h2 class="text__heading">Ведущие работодатели</h2>
-        <div class="generic-content">
-          <div class="profs-list p0 mb0">
-            <ul>
-              <?php foreach ( get_field('leading_empl') as $itemID ) : ?>
-                <li><a href="<?php echo get_the_permalink($itemID) ?>"><?php echo get_the_title($itemID) ?></a></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        </div>
-      </section>
-
+		
+	  <?php if ( get_field('leading_empl') ) { ?>
+		  <section class="text profs-item-page__list">
+			<h2 class="text__heading">Ведущие работодатели</h2>
+			<div class="generic-content">
+			  <div class="profs-list p0 mb0">
+				<ul>
+				  <?php foreach ( get_field('leading_empl') as $itemID ) : ?>
+					<li><a href="<?php echo get_the_permalink($itemID) ?>"><?php echo get_the_title($itemID) ?></a></li>
+				  <?php endforeach; ?>
+				</ul>
+			  </div>
+			</div>
+		  </section>
+      <?php } ?>
+		
       <?php if ( get_field('empl_extra') ): ?>
         <section class="text profs-item-page__list">
           <h2 class="text__heading">Дополнительная информация о работодателях</h2>

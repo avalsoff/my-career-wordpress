@@ -33,41 +33,43 @@ the_post();
       </div>
     <?php } ?>
 
-    <h1 class="heading heading--page">Федеральное государственное бюджетное образовательное учреждение высшего
-      образования «Сахалинский государственный университет»</h1>
+    <h1 class="heading heading--page"><?php the_title() ?></h1>
 
     <div class="edu-item-page__container">
-      <?php if ( get_field('edu_images') ) { ?>
-        <section class="edu-item-page__carousel slick--medium">
-          <?php 
-            $images = get_field('edu_images');
-            foreach ($images as $image) { ?>
-              <div class="slide slide--medium">
-                <div class="slide__image-wrapper">
-                  <img src="<?php echo $image['image']['url'] ?>" alt="<?php echo $image['image']['alt'] ?>" class="slide__image">
-                </div>
-              </div>
-          <?php
-            }
-          ?>
-        </section>
-      <?php } ?>
+      <?php if ( get_field('edu_images') ) {
+		$images = get_field('edu_images');
+		if ($images[0]['image']['url']!="") { ?>
+			<section class="edu-item-page__carousel slick--medium">
+			  <?php 
+				foreach ($images as $image) { ?>
+				  <div class="slide slide--medium">
+					<div class="slide__image-wrapper">
+					  <img src="<?php echo $image['image']['url'] ?>" alt="<?php echo $image['image']['alt'] ?>" class="slide__image">
+					</div>
+				  </div>
+			  <?php
+				}
+			  ?>
+			</section>
+      <?php } } ?>
 
       <article class="edu-item-page__info">
-        <section class="text text--text">
-          <h3 class="text__heading">
-            История образовательной организации
-          </h3>
-          <?php echo get_field('history') ?>
-        </section>
-        <section class="text text--text">
-          <h3 class="text__heading">
-            Структура
-          </h3>
-          <?php echo get_field('areas') ?>
-
-        </section>
-
+		<?php if ( get_field('history') ) { ?>
+			<section class="text text--text">
+			  <h3 class="text__heading">
+				История образовательной организации
+			  </h3>
+			  <?php echo get_field('history') ?>
+			</section>
+		<? } ?>
+		<?php if ( get_field('areas') ) { ?>
+			<section class="text text--text">
+			  <h3 class="text__heading">
+				Структура
+			  </h3>
+			  <?php echo get_field('areas') ?>
+			</section>
+		<? } ?>
         <?php if ( $coop = get_field('employers_coop') ) { ?>
           <section class="text text--text text--with-bg text--wide-list">
             <h3 class="text__heading">
@@ -87,41 +89,33 @@ the_post();
             </div>
           </section>
         <?php } ?>
-        
-        <section class="text text--text text--wide-list">
-          <h3 class="text__heading">
-            Дополнительная информация о работодателях
-          </h3>
-          <div class="generic-content">
-            <div class="wide-list">
-              <?php echo get_field('employers_extra') ?>
-            </div>
-          </div>
-        </section>
-        <section class="text text--text text--wide-list">
-          <h3 class="text__heading">
-            Приемущества для студентов
-          </h3>
-          <div class="generic-content">
-            <div class="wide-list">
-              <?php echo get_field('advantages') ?>
-            </div>
-          </div>
-        </section>
-
-        <?php if ( get_field('edu_indicators') ) { ?>          
-          <section class="text text--text">
-            <h3 class="text__heading">
-              Показатели системы образования
-            </h3>
-            <div class="generic-content">
-              <div class="profs-list">
-                <?php echo get_field('edu_indicators') ?>
-              </div>
-            </div>
-            
-          </section>
-        <?php } ?>        
+		  
+		<?php if ( get_field('employers_extra') ) { ?>        
+			<section class="text text--text text--wide-list">
+			  <h3 class="text__heading">
+				Дополнительная информация о работодателях
+			  </h3>
+			  <div class="generic-content">
+				<div class="wide-list">
+				  <?php echo get_field('employers_extra') ?>
+				</div>
+			  </div>
+			</section>
+        <?php } ?>
+		  
+		<?php if ( get_field('advantages') ) { ?>
+			<section class="text text--text text--wide-list">
+			  <h3 class="text__heading">
+				Преимущества для студентов
+			  </h3>
+			  <div class="generic-content">
+				<div class="wide-list">
+				  <?php echo get_field('advantages') ?>
+				</div>
+			  </div>
+			</section>
+        <?php } ?>
+		        
 
         <?php if ( get_field('edu_prof_list') ) { ?>          
           <section class="text text--text">
@@ -158,6 +152,7 @@ the_post();
                   <?php echo get_field('phone') ?>
                 </td>
               </tr>
+			  <?php if ( get_field('email') ) { ?>  
               <tr>
                 <td class="table__heading">E-mail: </td>
                 <td class="table__data">
@@ -166,14 +161,17 @@ the_post();
                   </a>
                 </td>
               </tr>
-              <tr>
-                <td class="table__heading">Сайт:</td>
-                <td class="table__data">
-                  <a href="<?php echo get_field('site') ?>" class="link">
-                    <?php echo get_field('site') ?>
-                  </a>
-                </td>
-              </tr>
+			  <?php } ?>
+			  <?php if ( get_field('site') ) { ?>   
+				  <tr>
+					<td class="table__heading">Сайт:</td>
+					<td class="table__data">
+					  <a href="<?php echo get_field('site') ?>" class="link">
+						<?php echo get_field('site') ?>
+					  </a>
+					</td>
+				  </tr>
+			   <?php } ?>
             </table>
           </div>
         </section>

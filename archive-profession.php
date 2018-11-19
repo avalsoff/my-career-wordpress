@@ -28,7 +28,8 @@ get_header();
           $currentLetter = mb_substr( $cur->post_title, 0, 1 );
           $acc[$currentLetter][] = [
             'title' => $cur->post_title,
-            'link' => get_permalink( $cur->ID )
+            'link' => get_permalink( $cur->ID ),
+			'content' => get_post_field('post_content', $cur->ID)
           ];
           return $acc;
         }, []);
@@ -40,9 +41,11 @@ get_header();
             </li>
             <?php foreach ($profs as $prof) :?>
               <li class="directory__item">
-                <a href="<?php echo $prof['link'] ?>" class="link directory__link">
-                  <?php echo $prof['title'] ?>
-                </a>
+				<?php if ($prof['content']!="") { ?>
+					<a href="<? echo $prof['link']; ?>" class="link directory__link">
+					  <?php echo $prof['title'] ?>
+					</a>
+		   	    <?php } else { echo $prof['title']; }?>
               </li>              
             <?php endforeach; ?>
           </ul>

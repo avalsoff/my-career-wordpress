@@ -75,7 +75,7 @@
               ?>
               <ul class="top-nav__items top-nav__items--icons">
                 <li class="top-nav__item">
-                  <a href="#" class="top-nav__link top-nav__link--icon top-nav__link--icon--eye">
+                  <a href="#" class="bvi-panel-open top-nav__link top-nav__link--icon top-nav__link--icon--eye">
                   </a>
                 </li>
                 <li class="top-nav__item">
