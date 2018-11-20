@@ -13,7 +13,8 @@
   $current = $wp_query->queried_object;
   query_posts([
     'cat' => $current->cat_ID,
-    'post_type' => [ 'page' ]
+    'post_type' => [ 'page' ],
+    'posts_per_page' => -1,
   ]);
 ?>
 <main class="employers-page">
@@ -50,6 +51,13 @@
           while ( have_posts() ) :
             the_post(); ?>            
             <li class="search-list__item">
+              <?php 
+                $pageNum = $wp_query->query['paged'] ? $wp_query->query['paged'] : 1;
+                $postNum = $wp_query->current_post + 1;
+                $postsPerPage = $wp_query->query_vars['posts_per_page'];
+                $postIndex =  $postNum + $postsPerPage * ($pageNum - 1);
+              ?>
+              <div class="search-list__count"><?php echo $postIndex ?>.</div>
               <div class="search-list__item-body">
                 <a class="link search-list__link" href="<?php the_permalink(); ?>"><?php the_title() ?></a>
               </div>

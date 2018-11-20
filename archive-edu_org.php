@@ -46,7 +46,7 @@ get_header();
     </ul>
 
 
-    <ol class="search-list search-list--primary">
+    <ul class="search-list search-list--primary">
       <?php
         if ( have_posts() ) {
           while ( have_posts() ) {
@@ -56,7 +56,7 @@ get_header();
         }
         wp_reset_postdata();
       ?>
-    </ol>
+    </ul>
 
     <?php
       $pagination = paginate_links([

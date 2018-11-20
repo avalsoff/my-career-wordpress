@@ -111,12 +111,15 @@ get_header();
     <div class="barometr-page__wrapper row">
       <article class="col-xl-9 col-lg-8">
         <section class="folder">
-          <header class="folder__header">
+          <div class="folder__header">
             <h3 class="folder__heading">Баланс</h3>
             <small class="folder__title">Число вакансий и соискателей совпадает</small>
-          </header>
-          <main class="folder__profs">
+          </div>
+          <div class="folder__profs">
             <ul class="folder__profs-list">
+              <?php if ( !$viewModel[0] ): ?>
+                <li class="folder__profs-item">Нет регионов</li>
+              <?php endif; ?>
               <?php foreach ($viewModel[0] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
@@ -125,16 +128,19 @@ get_header();
               </li>
               <?php endforeach; ?>
             </ul>
-          </main>
+          </div>
         </section>
 
         <section class="folder folder--neutral">
-          <header class="folder__header">
+          <div class="folder__header">
             <h3 class="folder__heading">Профицит</h3>
             <small class="folder__title">Число соискателей превышает число вакансий</small>
-          </header>
-          <main class="folder__profs">
+          </div>
+          <div class="folder__profs">
             <ul class="folder__profs-list">
+              <?php if ( !$viewModel[1] ): ?>
+                <li class="folder__profs-item">Нет регионов</li>
+              <?php endif; ?>
               <?php foreach ($viewModel[1] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
@@ -143,16 +149,19 @@ get_header();
               </li>
               <?php endforeach; ?>
             </ul>
-          </main>
+          </div>
         </section>
 
         <section class="folder folder--danger">
-          <header class="folder__header">
+          <div class="folder__header">
             <h3 class="folder__heading">Дефицит</h3>
             <small class="folder__title">Число вакансий превышает число соискателей</small>
-          </header>
-          <main class="folder__profs">
+          </div>
+          <div class="folder__profs">
             <ul class="folder__profs-list">
+              <?php if ( !$viewModel[2] ): ?>
+                <li class="folder__profs-item">Нет регионов</li>
+              <?php endif; ?>
               <?php foreach ($viewModel[2] as $item) : ?>
               <li class="folder__profs-item">
                 <?php
@@ -161,7 +170,7 @@ get_header();
               </li>
               <?php endforeach; ?>
             </ul>
-          </main>
+          </div>
         </section>
       </article>
       <aside class="col-xl-3 col-lg-4">

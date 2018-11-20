@@ -31,7 +31,7 @@ the_post();
         ],
         [
           'href'  => '/career-guidance',
-          'title' => 'Новости' 
+          'title' => 'Профориентация' 
         ],
       ]) 
     ?>

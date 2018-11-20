@@ -1,4 +1,11 @@
 <li class="search-list__item">
+  <?php 
+    $pageNum = $wp_query->query['paged'] ? $wp_query->query['paged'] : 1;
+    $postNum = $wp_query->current_post + 1;
+    $postsPerPage = $wp_query->query_vars['posts_per_page'];
+    $postIndex =  $postNum + $postsPerPage * ($pageNum - 1);
+  ?>
+  <div class="search-list__count"><?php echo $postIndex ?>.</div>
   <div class="search-list__item-body">
     <a class="link search-list__link" href="<?php the_permalink() ?>"><?php the_title() ?></a>
     <table class="search-list__table">

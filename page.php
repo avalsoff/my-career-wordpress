@@ -19,11 +19,6 @@ the_post();
 <main class="contacts-page">
   <div class="container">
     <div class="contacts-page__container">
-		<pre>
-		<?php 
-			// print_r( get_the_category() );
-		?>
-		</pre>
 			<?php
 				$breadCrumbps = [
 					[
@@ -32,11 +27,10 @@ the_post();
 					]
 				];
 				$curCategory = get_the_category();
-				print_r($curCategory);
-				if ($curCategory) {
-					$breadCrumbs[] = [
-						'href' 	=> get_term_link($curCategory->term_id),
-						'title' => $curCategory->name
+				if ( get_the_category() ) {
+					$breadCrumbps[] = [
+						'href' 	=> '/category/useful-materials',
+						'title' => 'Полезные материалы'
 					];
 				}
 				pageBreadcrumbps($breadCrumbps);

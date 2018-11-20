@@ -17,11 +17,6 @@ the_post();
 ?>
 
 <main class="test-page">
-  <!-- <pre>
-    <?php 
-      // echo esc_html( print_r( get_field('test_results'), true) );
-    ?>
-  </pre> -->
   <div class="container test-page__container">
     <?php 
       pageBreadcrumbps([
@@ -47,9 +42,7 @@ the_post();
       </div>
       <div class="test__questions">
         <p class="test__instruction">
-          Вам предлагается оценить различные виды занятий, описанные в опроснике. Оценивайте по порядку каждое
-          занятие, ничего не пропуская. Подумайте перед ответом на каждый вопрос и постарайтесь дать как можно более
-          точный ответ.
+          Данные вопросы касаются твоего отношения к различным направлениям деятельности. Нравится ли тебе делать то, о чем говорится в опроснике?
         </p>
         <div class="test__main">
           <small class="test__top-index"></small>
@@ -57,7 +50,7 @@ the_post();
             $questionText = 'Нравится ли тебе';
             $answers = [
               [
-                'text' => 'Да',
+                'text'  => 'Да',
                 'value' => 2
               ],
               [
@@ -131,8 +124,7 @@ the_post();
               </p>
               <?php foreach ($answers as $ansIndex => $answer): ?>
                 <label class="test__answer">
-                  <input class="test__input" value="<?php echo $answer['value'] ?>" data-key="<?php echo $keys[($qIndex + 1) % 10] ?>" type="radio"
-                    name="<?php echo 'ans_' . $qIndex ?>">
+                  <input class="test__input" value="<?php echo $answer['value'] ?>" data-key="<?php echo $keys[($qIndex + 1) % 10] ?>" type="radio" name="<?php echo 'ans_' . $qIndex ?>">
                   <span>
                     <?php echo $answer['text'] ?></span>
                 </label>
@@ -157,11 +149,11 @@ the_post();
           <?php echo $results[$resKey][0] ?>
           <ul>
             <?php foreach ($results[$resKey][1] as $profID): ?>
-                <li>
-					<? if ( get_post_field('post_content', $profID) ) { ?>
-					<a href="<? echo get_permalink($profID); ?>"><?php echo get_the_title($profID); ?></a>
-					<? } else { echo get_the_title($profID); } ?>
-				</li>
+              <li>
+                <? if ( get_post_field('post_content', $profID) ) { ?>
+                  <a href="<? echo get_permalink($profID); ?>"><?php echo get_the_title($profID); ?></a>
+                <? } else { echo get_the_title($profID); } ?>
+              </li>
             <?php endforeach; ?>
           </ul>
         </div>
